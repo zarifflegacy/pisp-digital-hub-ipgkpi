@@ -1,1636 +1,1692 @@
 <!DOCTYPE html>
-<html lang="ms" class="scroll-smooth">
+<html lang="ms">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PISP DIGITAL HUB | IPG Kampus Pendidikan Islam</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ipgNavy: '#002B49',
-                        ipgBlue: '#005691',
-                        ipgGold: '#D4AF37',
-                        ipgEmerald: '#00875A',
-                        ipgLight: '#F4F7FA'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <title>PISP Digital Hub | Portal Utama Pelajar IPGKPI</title>
+    
+    <!-- Google Fonts: Playfair Display (Headings) & Cormorant Garamond / Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <style>
-        /* Custom Styling & Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #005691; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #002B49; }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+        :root {
+            /* VINTAGE EDITORIAL PALETTE */
+            --pisp-bg-vintage: #F4F0EA;       /* Latar Belakang Coklat Kertas Purba / Vintage Parchment */
+            --pisp-card-bg: #FAF8F5;          /* Latar Belakang Kad Helaian Majalah */
+            --pisp-card-border: #D7CCC8;      /* Garisan Sempadan Pale Taupe */
+            
+            /* BUTTON COLORS */
+            --pisp-btn-primary: #3E2723;      /* Coklat Espresso Pekat (CTA Utama) */
+            --pisp-btn-primary-hover: #2C1A14;
+            --pisp-btn-secondary: #D7CCC8;    /* Coklat Susu Cair / Pale Taupe (Button Sekunder) */
+            --pisp-btn-secondary-hover: #C5B7B1;
+            
+            /* TEXT COLORS */
+            --pisp-text-headline: #2C1D11;     /* Espresso Dark Text */
+            --pisp-text-body: #4A3B32;         /* Warm Sepia Text */
+            --pisp-text-muted: #7D6B5D;        /* Light Sepia Text */
+            --pisp-accent-sepia: #8D6E63;
+            
+            /* TYPOGRAPHY */
+            --font-serif-heading: 'Playfair Display', Georgia, serif;
+            --font-serif-subheading: 'Cormorant Garamond', Georgia, serif;
+            --font-sans-body: 'Plus Jakarta Sans', sans-serif;
+            
+            --transition-speed: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --pisp-box-shadow: 0 4px 20px rgba(62, 39, 35, 0.05);
+            --pisp-box-shadow-hover: 0 10px 30px rgba(62, 39, 35, 0.12);
         }
-        .hero-bg {
-            background: linear-gradient(135deg, rgba(0, 43, 73, 0.95), rgba(0, 86, 145, 0.9)), 
-                        url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans-body);
+            background-color: var(--pisp-bg-vintage);
+            color: var(--pisp-text-body);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+            background-image: radial-gradient(rgba(141, 110, 99, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* NAVBAR VINTAGE EDITORIAL */
+        .navbar-pisp {
+            background-color: rgba(244, 240, 234, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid var(--pisp-btn-primary);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+
+        .navbar-brand-text {
+            font-family: var(--font-serif-heading);
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--pisp-text-headline);
+        }
+
+        .nav-link {
+            font-family: var(--font-sans-body);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--pisp-text-body) !important;
+            padding: 0.5rem 0.9rem !important;
+            border-radius: 4px;
+            transition: all var(--transition-speed);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--pisp-bg-vintage) !important;
+            background-color: var(--pisp-btn-primary);
+        }
+
+        .nav-link.nav-admin-link {
+            border: 1px solid var(--pisp-btn-primary);
+            color: var(--pisp-btn-primary) !important;
+            margin-left: 0.5rem;
+        }
+
+        .nav-link.nav-admin-link:hover, .nav-link.nav-admin-link.active {
+            background-color: var(--pisp-btn-primary) !important;
+            color: var(--pisp-bg-vintage) !important;
+        }
+
+        /* HERO SECTION EDITORIAL */
+        .hero-section {
+            padding: 4.5rem 0 3rem;
+            text-align: center;
+            border-bottom: 1px solid var(--pisp-card-border);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .hero-badge {
+            background-color: var(--pisp-btn-secondary);
+            border: 1px solid var(--pisp-card-border);
+            color: var(--pisp-text-headline);
+            font-family: var(--font-serif-subheading);
+            font-size: 1.05rem;
+            font-style: italic;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 0.35rem 1.5rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--pisp-text-headline);
+            margin-bottom: 0.5rem;
+            line-height: 1.15;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-serif-subheading);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--pisp-accent-sepia);
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+        }
+
+        .hero-desc {
+            font-size: 1.02rem;
+            color: var(--pisp-text-body);
+            max-width: 800px;
+            line-height: 1.8;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .editorial-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem auto 0;
+            width: 150px;
+        }
+
+        .editorial-divider::before, .editorial-divider::after {
+            content: '';
+            height: 1px;
+            background-color: var(--pisp-btn-primary);
+            flex-grow: 1;
+        }
+
+        .editorial-divider span {
+            color: var(--pisp-btn-primary);
+            font-size: 0.9rem;
+        }
+
+        .content-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        /* SECTION HEADER VINTAGE */
+        .section-header {
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--pisp-btn-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--pisp-text-headline);
+            margin: 0;
+        }
+
+        .section-header p {
+            font-family: var(--font-serif-subheading);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--pisp-text-muted);
+            margin: 0;
+        }
+
+        /* TILES GRID & CARDS */
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tile-item {
+            background-color: var(--pisp-card-bg);
+            border: 1px solid var(--pisp-card-border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all var(--transition-speed);
+            box-shadow: var(--pisp-box-shadow);
+            position: relative;
+        }
+
+        .tile-item::after {
+            content: '';
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 1px solid rgba(215, 204, 200, 0.4);
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        .tile-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--pisp-box-shadow-hover);
+            border-color: var(--pisp-btn-primary);
+        }
+
+        .tile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tile-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 4px;
+            background-color: var(--pisp-btn-secondary);
+            border: 1px solid var(--pisp-card-border);
+            color: var(--pisp-btn-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            transition: all var(--transition-speed);
+        }
+
+        .tile-item:hover .tile-icon-box {
+            background-color: var(--pisp-btn-primary);
+            color: var(--pisp-bg-vintage);
+        }
+
+        .tile-title {
+            font-family: var(--font-serif-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--pisp-text-headline);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .tile-subtitle {
+            font-family: var(--font-serif-subheading);
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--pisp-accent-sepia);
+            margin-top: 0.15rem;
+        }
+
+        .tile-desc {
+            font-size: 0.9rem;
+            color: var(--pisp-text-body);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        /* BUTTON STYLES (EXPRESSO & PALE TAUPE) */
+        .btn-pisp-primary {
+            background-color: var(--pisp-btn-primary) !important;
+            color: #F4F0EA !important;
+            border: 1px solid var(--pisp-btn-primary) !important;
+            font-family: var(--font-sans-body);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.65rem 1.2rem;
+            border-radius: 4px;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(62, 39, 35, 0.2);
+        }
+
+        .btn-pisp-primary:hover {
+            background-color: var(--pisp-btn-primary-hover) !important;
+            color: #FFFFFF !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(62, 39, 35, 0.3);
+        }
+
+        .btn-pisp-outline, .btn-pisp-secondary {
+            background-color: var(--pisp-btn-secondary) !important;
+            color: var(--pisp-btn-primary) !important;
+            border: 1px solid #C5B7B1 !important;
+            font-family: var(--font-sans-body);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.6rem 1.1rem;
+            border-radius: 4px;
+            transition: all var(--transition-speed);
+        }
+
+        .btn-pisp-outline:hover, .btn-pisp-secondary:hover {
+            background-color: var(--pisp-btn-secondary-hover) !important;
+            color: var(--pisp-btn-primary) !important;
+            border-color: var(--pisp-btn-primary) !important;
+        }
+
+        /* ANNOUNCEMENT BOX */
+        .announcement-box {
+            background-color: var(--pisp-card-bg);
+            border: 1px solid var(--pisp-card-border);
+            border-left: 6px solid var(--pisp-btn-primary);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            transition: all var(--transition-speed);
+            box-shadow: var(--pisp-box-shadow);
+        }
+
+        .announcement-box:hover {
+            box-shadow: var(--pisp-box-shadow-hover);
+            transform: translateX(4px);
+        }
+
+        .announcement-badge {
+            font-family: var(--font-serif-subheading);
+            font-size: 0.9rem;
+            font-style: italic;
+            background-color: var(--pisp-btn-secondary);
+            color: var(--pisp-btn-primary);
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.6rem;
+            border: 1px solid var(--pisp-card-border);
+        }
+
+        /* ACADEMIC SEARCH CARD */
+        .academic-search-card {
+            background-color: var(--pisp-card-bg);
+            border: 1px solid var(--pisp-card-border);
+            border-radius: 6px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--pisp-box-shadow);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .academic-search-card::after {
+            content: '';
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px solid rgba(215, 204, 200, 0.4);
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        .search-engine-selector {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .search-engine-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--pisp-text-body);
+        }
+
+        /* FORMS & INPUTS */
+        .form-control, .form-select {
+            background-color: #FFFFFF !important;
+            border: 1px solid var(--pisp-card-border) !important;
+            color: var(--pisp-text-headline) !important;
+            border-radius: 4px;
+            padding: 0.65rem 1rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--pisp-btn-primary) !important;
+            box-shadow: 0 0 0 3px rgba(62, 39, 35, 0.15) !important;
+        }
+
+        /* CONTROLS BAR */
+        .controls-bar {
+            background-color: var(--pisp-card-bg);
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            border: 1px solid var(--pisp-card-border);
+            margin-bottom: 1.75rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--pisp-box-shadow);
+        }
+
+        .glass-card {
+            background-color: var(--pisp-card-bg);
+            border: 1px solid var(--pisp-card-border);
+            border-radius: 6px;
+            box-shadow: var(--pisp-box-shadow);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-badge.connected {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+
+        .status-badge.error {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+
+        .admin-sidebar {
+            background-color: var(--pisp-card-bg);
+            border-radius: 6px;
+            border: 1px solid var(--pisp-card-border);
+            padding: 1rem 0;
+        }
+
+        .admin-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.25rem;
+            color: var(--pisp-text-body);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all var(--transition-speed);
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .admin-nav-item:hover, .admin-nav-item.active {
+            background-color: var(--pisp-btn-secondary);
+            color: var(--pisp-btn-primary);
+            border-left-color: var(--pisp-btn-primary);
+        }
+
+        /* MODAL VINTAGE STYLE */
+        .modal-content {
+            background-color: var(--pisp-bg-vintage) !important;
+            border: 2px solid var(--pisp-btn-primary) !important;
+            color: var(--pisp-text-headline) !important;
+            border-radius: 6px !important;
+            box-shadow: var(--pisp-box-shadow-hover) !important;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--pisp-card-border) !important;
+            background-color: var(--pisp-card-bg);
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--pisp-card-border) !important;
+            background-color: var(--pisp-card-bg);
+        }
+
+        /* FOOTER EDITORIAL */
+        footer {
+            background-color: var(--pisp-btn-primary);
+            border-top: 3px solid var(--pisp-accent-sepia);
+            padding: 2rem 0;
+            margin-top: auto;
+            text-align: center;
+            font-family: var(--font-serif-subheading);
+            font-size: 1rem;
+            color: #F4F0EA;
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE STYLES */
+        @media (max-width: 991.98px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.25rem; }
+        }
+
+        @media (max-width: 575.98px) {
+            .tiles-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2rem; letter-spacing: 1px; }
+            .academic-search-card { padding: 1.5rem 1rem; }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between selection:bg-ipgGold selection:text-white">
+<body>
 
-    <!-- HEADER NAVBAR -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- IPG Logo & Brand Title -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
-                    <img src="ipgkpi_2.jpg" alt="Logo IPG Kampus Pendidikan Islam" class="h-12 w-auto object-contain hover:scale-105 transition-transform bg-white rounded-xl p-1 shadow-md border border-slate-200" onerror="this.onerror=null; this.src='https://placehold.co/120x120/002B49/FFFFFF?text=IPG+KPI';">
+    <nav class="navbar navbar-expand-lg navbar-pisp">
+        <div class="container content-container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#utama" onclick="switchTab('utama')">
+                <i class="fa-solid fa-book-open fs-3" style="color: var(--pisp-btn-primary);"></i>
+                <span class="navbar-brand-text">PISP Digital Hub</span>
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <i class="fa-solid fa-bars fs-4" style="color: var(--pisp-btn-primary);"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0 gap-lg-1">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="nav-utama" href="#utama" onclick="switchTab('utama')">Utama</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-sumber" href="#sumber" onclick="switchTab('sumber')">Sumber Pelajar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-perpustakaan" href="#perpustakaan" onclick="switchTab('perpustakaan')">Perpustakaan Awam</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-rujukan" href="#rujukan" onclick="switchTab('rujukan')">Rujukan Akademik</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-ai" href="#ai" onclick="switchTab('ai')">AI Pendidikan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-admin-link" id="nav-admin" href="#admin" onclick="switchTab('admin')">
+                            <i class="fa-solid fa-lock me-1"></i>Admin
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container content-container position-relative">
+            <div class="hero-badge">
+                <i class="fa-solid fa-feather-pointed me-1"></i> Institut Pendidikan Guru Kampus Pendidikan Islam
+            </div>
+            <h1 class="hero-title">PISP DIGITAL HUB</h1>
+            <p class="hero-subtitle">Portal Rujukan, Sumber Akademik & Teknologi Pembelajaran Pelajar</p>
+            <p class="hero-desc">Satu gerbang ilmu terintegrasi yang menghimpunkan portal rasmi IPGKPI, perkhidmatan perpustakaan digital universiti awam, pangkalan data rujukan ilmiah serta alat kecerdasan buatan pendidikan dalam susun atur estetik klasik.</p>
+            
+            <div class="editorial-divider">
+                <span>✦</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="container content-container my-4 my-md-5">
+
+        <!-- VIEW: UTAMA -->
+        <div id="view-utama" class="view-section">
+            
+            <!-- PENGUMUMAN -->
+            <div class="mb-5">
+                <div class="section-header">
                     <div>
-                        <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-ipgNavy block">PISP <span class="text-ipgBlue">DIGITAL HUB</span></span>
-                        <span class="text-xs text-slate-500 font-medium block">IPG Kampus Pendidikan Islam</span>
+                        <h2>Pengumuman Terkini</h2>
+                        <p>Notis & makluman rasmi IPG Kampus Pendidikan Islam</p>
                     </div>
                 </div>
+                <div id="announcements-container">
+                    <!-- Dynamic Loading State -->
+                </div>
+            </div>
 
-                <!-- Desktop Nav Navigation -->
-                <nav class="hidden md:flex items-center space-x-1 lg:space-x-4">
-                    <button onclick="navigateTo('home')" id="nav-home" class="nav-link px-4 py-2 rounded-lg font-semibold text-sm transition-all text-ipgNavy hover:bg-slate-100 flex items-center space-x-2">
-                        <i class="fa-solid fa-house"></i> <span>Utama</span>
-                    </button>
-                    <button onclick="navigateTo('sumber')" id="nav-sumber" class="nav-link px-4 py-2 rounded-lg font-semibold text-sm transition-all text-slate-600 hover:text-ipgNavy hover:bg-slate-100 flex items-center space-x-2">
-                        <i class="fa-solid fa-folder-open text-amber-500"></i> <span>Sumber Pelajar</span>
-                    </button>
-                    <button onclick="navigateTo('ai')" id="nav-ai" class="nav-link px-4 py-2 rounded-lg font-semibold text-sm transition-all text-slate-600 hover:text-ipgNavy hover:bg-slate-100 flex items-center space-x-2">
-                        <i class="fa-solid fa-robot text-emerald-500"></i> <span>AI Pendidikan</span>
-                    </button>
-                    <button onclick="navigateTo('rujukan')" id="nav-rujukan" class="nav-link px-4 py-2 rounded-lg font-semibold text-sm transition-all text-slate-600 hover:text-ipgNavy hover:bg-slate-100 flex items-center space-x-2">
-                        <i class="fa-solid fa-book-bookmark text-blue-500"></i> <span>Rujukan</span>
-                    </button>
-                    <button onclick="openAdminModal()" class="ml-2 px-3 py-1.5 rounded-lg border border-ipgNavy/20 bg-slate-50 hover:bg-ipgNavy hover:text-white font-medium text-xs text-ipgNavy transition-all flex items-center space-x-1 shadow-sm">
-                        <i class="fa-solid fa-lock text-slate-400"></i> <span>Admin</span>
-                    </button>
-                </nav>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:text-slate-900 focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
+            <!-- PORTAL UTAMA (PAPARAN TILES) -->
+            <div>
+                <div class="section-header">
+                    <div>
+                        <h2>Portal & Sistem Rasmi</h2>
+                        <p>Pautan pantas ke aplikasi dan portal maklumat IPGM</p>
+                    </div>
+                </div>
+                <div class="tiles-grid" id="portal-container">
+                    <!-- Dynamic Tiles Grid -->
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 px-4 pt-2 pb-4 space-y-2 shadow-xl">
-            <button onclick="navigateTo('home')" class="w-full text-left px-4 py-2.5 rounded-lg font-semibold text-slate-700 hover:bg-slate-100 flex items-center space-x-3">
-                <i class="fa-solid fa-house w-6 text-ipgBlue"></i> <span>Utama</span>
-            </button>
-            <button onclick="navigateTo('sumber')" class="w-full text-left px-4 py-2.5 rounded-lg font-semibold text-slate-700 hover:bg-slate-100 flex items-center space-x-3">
-                <i class="fa-solid fa-folder-open w-6 text-amber-500"></i> <span>Sumber Pelajar</span>
-            </button>
-            <button onclick="navigateTo('ai')" class="w-full text-left px-4 py-2.5 rounded-lg font-semibold text-slate-700 hover:bg-slate-100 flex items-center space-x-3">
-                <i class="fa-solid fa-robot w-6 text-emerald-500"></i> <span>AI Pendidikan</span>
-            </button>
-            <button onclick="navigateTo('rujukan')" class="w-full text-left px-4 py-2.5 rounded-lg font-semibold text-slate-700 hover:bg-slate-100 flex items-center space-x-3">
-                <i class="fa-solid fa-book-bookmark w-6 text-blue-500"></i> <span>Rujukan</span>
-            </button>
-            <button onclick="openAdminModal()" class="w-full text-left px-4 py-2.5 rounded-lg font-semibold text-ipgNavy bg-slate-100 hover:bg-ipgNavy hover:text-white flex items-center space-x-3 transition-colors">
-                <i class="fa-solid fa-lock w-6"></i> <span>Portal Admin</span>
-            </button>
-        </div>
-    </header>
-
-    <main class="flex-grow">
-        
-        <!-- ================= PAGE 1: HOMEPAGE (UTAMA) ================= -->
-        <section id="page-home" class="page-section">
-            <!-- Hero Banner -->
-            <div class="hero-bg text-white py-16 px-4 sm:px-6 lg:px-8 shadow-xl relative overflow-hidden">
-                <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div class="space-y-4 max-w-3xl text-center md:text-left">
-                        <span id="hero-tag" class="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-ipgGold/20 text-ipgGold border border-ipgGold/30 uppercase tracking-widest backdrop-blur-sm">
-                            <i class="fa-solid fa-graduation-cap mr-1"></i> Portal Utama Pelajar PISP IPGKPI
-                        </span>
-                        <h1 id="hero-title" class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-                            Pusat Sumber & <span class="text-amber-400">Digital Hub</span> Keguruan
-                        </h1>
-                        <p id="hero-desc" class="text-slate-200 text-sm sm:text-base leading-relaxed">
-                            Aplikasi sehenti integrasi sumber pembelajaran, carian akademik rujukan, peranti AI pendidikan moden, dan pautan portal rasmi IPG Kampus Pendidikan Islam Bangi.
-                        </p>
-                    </div>
+        <!-- VIEW: SUMBER PELAJAR -->
+        <div id="view-sumber" class="view-section d-none">
+            
+            <!-- SEARCH ENGINE -->
+            <div class="academic-search-card">
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold mb-1" style="font-family: var(--font-serif-heading); color: var(--pisp-text-headline);">
+                        <i class="fa-solid fa-magnifying-glass me-2" style="color: var(--pisp-btn-primary);"></i>Enjin Carian Sumber & Jurnal Akademik
+                    </h3>
+                    <p class="small text-muted" style="font-family: var(--font-serif-subheading); font-size: 1.05rem;">Taip topik kajian, kod kursus atau tajuk kerja kursus untuk membuat carian rujukan pantas.</p>
                 </div>
-            </div>
 
-            <!-- Quick Action Buttons Grid (Links to Key Websites) -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-                <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center space-x-2 border-l-4 border-ipgNavy pl-3">
-                    <i class="fa-solid fa-bolt text-amber-500"></i> <span>Pautan Pantas Portal Utama</span>
-                </h2>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <!-- Website iTEMS -->
-                    <a id="card-items-btn" href="https://items.moe.gov.my/umum/" target="_blank" rel="noopener noreferrer" class="group bg-white p-5 rounded-2xl shadow-sm hover:shadow-xl border border-slate-200 transition-all hover:-translate-y-1 flex items-start space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors flex items-center space-x-1">
-                                <span>iTEMS</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-50"></i>
-                            </h3>
-                            <p class="text-xs text-slate-500 mt-1">Sistem pengurusan peperiksaan rasmi IPGM.</p>
-                        </div>
-                    </a>
-
-                    <!-- IPGKPI Official -->
-                    <a id="card-ipgkpi-btn" href="https://ipgkpi.moe.edu.my" target="_blank" rel="noopener noreferrer" class="group bg-white p-5 rounded-2xl shadow-sm hover:shadow-xl border border-slate-200 transition-all hover:-translate-y-1 flex items-start space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                            <i class="fa-solid fa-building-columns"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition-colors flex items-center space-x-1">
-                                <span>IPGKPI</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-50"></i>
-                            </h3>
-                            <p class="text-xs text-slate-500 mt-1">Portal Rasmi IPG Kampus Pendidikan Islam Bangi, Selangor.</p>
-                        </div>
-                    </a>
-
-                    <!-- Pusat Sumber al-Ghazali Library -->
-                    <a id="card-psag-btn" href="http://psagipgkpi.blogspot.com/" target="_blank" rel="noopener noreferrer" class="group bg-white p-5 rounded-2xl shadow-sm hover:shadow-xl border border-slate-200 transition-all hover:-translate-y-1 flex items-start space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl shrink-0 group-hover:bg-amber-600 group-hover:text-white transition-colors">
-                            <i class="fa-solid fa-book-reader"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 group-hover:text-amber-600 transition-colors flex items-center space-x-1">
-                                <span>Pusat Sumber al-Ghazali</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-50"></i>
-                            </h3>
-                            <p class="text-xs text-slate-500 mt-1">Pusat Sumber IPGKPI.</p>
-                        </div>
-                    </a>
-
-                    <!-- Facebook IPGKPI -->
-                    <a id="card-fb-btn" href="https://www.facebook.com/ipgkampuspendidikanislam/?locale=ms_MY" target="_blank" rel="noopener noreferrer" class="group bg-white p-5 rounded-2xl shadow-sm hover:shadow-xl border border-slate-200 transition-all hover:-translate-y-1 flex items-start space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                            <i class="fa-brands fa-facebook"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors flex items-center space-x-1">
-                                <span>Facebook IPGKPI</span> <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-50"></i>
-                            </h3>
-                            <p class="text-xs text-slate-500 mt-1">Halaman Facebook rasmi IPG Kampus Pendidikan Islam.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Announcements Section -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                <!-- Pengumuman Penting (Important Announcements) -->
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-bold text-slate-900 flex items-center space-x-2 border-l-4 border-ipgNavy pl-3">
-                            <i class="fa-solid fa-bullhorn text-rose-500"></i> <span>Pengumuman Penting</span>
-                        </h2>
+                <form id="academicSearchForm" onsubmit="executeAcademicSearch(event)">
+                    <div class="search-engine-selector justify-content-center">
+                        <label class="search-engine-option">
+                            <input type="radio" name="searchEngine" value="google" checked class="form-check-input">
+                            <i class="fa-brands fa-google me-1"></i> Google
+                        </label>
+                        <label class="search-engine-option">
+                            <input type="radio" name="searchEngine" value="scholar" class="form-check-input">
+                            <i class="fa-solid fa-graduation-cap me-1"></i> Google Scholar
+                        </label>
+                        <label class="search-engine-option">
+                            <input type="radio" name="searchEngine" value="books" class="form-check-input">
+                            <i class="fa-solid fa-book-open me-1"></i> Google Books
+                        </label>
                     </div>
 
-                    <div id="announcements-container" class="space-y-4">
-                        <!-- Dynamic Announcements Loaded via JS -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= PAGE 2: SUMBER PELAJAR ================= -->
-        <section id="page-sumber" class="page-section hidden py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="mb-8">
-                <span class="text-xs font-bold text-amber-500 uppercase tracking-wider">Pusat Rujukan Pelajar</span>
-                <h1 class="text-3xl font-extrabold text-ipgNavy tracking-tight">Sumber Pelajar PISP</h1>
-                <p class="text-slate-600 text-sm mt-1">Akses terus kepada sistem tugasan, enjin carian Google teras, dan simpanan rujukan latihan perguruan.</p>
-            </div>
-
-            <!-- Integrated Search Bar (Linked with Google Search API/Query) -->
-            <div class="bg-gradient-to-r from-ipgNavy to-ipgBlue p-6 sm:p-8 rounded-2xl shadow-xl text-white mb-10">
-                <h3 class="text-lg font-bold mb-2 flex items-center space-x-2">
-                    <i class="fa-solid fa-magnifying-glass text-amber-400"></i>
-                    <span>Sistem Carian Sumber Rujukan & Jurnal</span>
-                </h3>
-                <p class="text-xs text-slate-200 mb-4">Taip topik kajian, kod kursus (contoh: PRJP4013, PRJP4023), atau tajuk kerja kursus untuk carian akademik segera di Google & Google Scholar.</p>
-                
-                <form onsubmit="handleGoogleSearch(event)" class="flex flex-col sm:flex-row gap-3">
-                    <div class="relative flex-grow">
-                        <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
-                        <input type="text" id="resource-search-input" placeholder="Cari nota, tajuk kajian tindakan, jurnal..." class="w-full pl-11 pr-4 py-3.5 rounded-xl text-slate-900 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-ipgGold font-medium text-sm shadow-inner">
-                    </div>
-                    <div class="flex gap-2">
-                        <button type="submit" class="px-6 py-3.5 bg-ipgGold hover:bg-amber-500 text-ipgNavy font-bold rounded-xl text-sm transition-colors flex items-center justify-center space-x-2 shadow-md">
-                            <span>Cari Google</span>
-                        </button>
-                        <button type="button" onclick="handleScholarSearch()" class="px-5 py-3.5 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-xl text-sm transition-colors flex items-center justify-center space-x-1 backdrop-blur-md border border-white/30">
-                            <i class="fa-solid fa-graduation-cap"></i> <span>Scholar</span>
+                    <div class="input-group input-group-lg">
+                        <input type="text" id="academicSearchQuery" class="form-control fs-6 border-end-0" placeholder="Cari nota, tajuk kajian tindakan, jurnal..." required>
+                        <button type="submit" class="btn btn-pisp-primary px-4 fs-6">
+                            <i class="fa-solid fa-magnifying-glass"></i> Cari
                         </button>
                     </div>
                 </form>
             </div>
 
-            <!-- Quick Button Links (Grid of Key Systems) -->
-            <h2 class="text-xl font-bold text-slate-900 mb-5 flex items-center space-x-2 border-l-4 border-amber-500 pl-3">
-                <i class="fa-solid fa-link text-ipgBlue"></i> <span>Pautan Terus Sistem Utama</span>
-            </h2>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                <!-- Google Classroom Link -->
-                <a id="sumber-classroom-btn" href="https://classroom.google.com" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 group">
-                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-chalkboard"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">Google Classroom</h4>
-                    <p class="text-xs text-slate-500 mt-1">Portal perbincangan, muat naik tugasan dan modul kuliah.</p>
-                    <span class="inline-flex items-center text-xs text-emerald-600 font-semibold mt-4">
-                        Buka Aplikasi <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </span>
-                </a>
-
-                <!-- items Link -->
-                <a id="sumber-items-btn" href="https://items.moe.gov.my/umum/" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 group">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-laptop-code"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">Sistem iTEMS</h4>
-                    <p class="text-xs text-slate-500 mt-1">Sistem Pengurusan Pentaksiran & Kerja Kursus IPG Malaysia.</p>
-                    <span class="inline-flex items-center text-xs text-blue-600 font-semibold mt-4">
-                        Buka iTEMS <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </span>
-                </a>
-
-                <!-- Pusat Sumber al-Ghazali Link -->
-                <a id="sumber-psag-btn" href="http://psagipgkpi.blogspot.com/" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 group">
-                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 group-hover:text-amber-600 transition-colors">Pusat Sumber al-Ghazali</h4>
-                    <p class="text-xs text-slate-500 mt-1">Pusat Sumber al-Ghazali IPG Kampus Pendidikan Islam.</p>
-                    <span class="inline-flex items-center text-xs text-amber-600 font-semibold mt-4">
-                        Layari Portal <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </span>
-                </a>
-
-                <!-- Portal DELIMa Link -->
-                <a id="sumber-delima-btn" href="https://delima.moe-dl.edu.my" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 group">
-                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 group-hover:text-purple-600 transition-colors">Portal DELIMa</h4>
-                    <p class="text-xs text-slate-500 mt-1">Digital Educational Learning Initiative Malaysia (KPM).</p>
-                    <span class="inline-flex items-center text-xs text-purple-600 font-semibold mt-4">
-                        Buka DELIMa <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </span>
-                </a>
-            </div>
-
-            <!-- Dynamic Resources List -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="font-bold text-slate-900 text-base flex items-center space-x-2">
-                        <i class="fa-solid fa-building-columns text-ipgBlue"></i>
-                        <span>Perpustakaan Universiti Awam Malaysia</span>
-                    </h3>
-                    <span id="sumber-count-badge" class="px-2.5 py-1 bg-slate-100 text-slate-600 text-xs rounded-full font-semibold">0 Item</span>
-                </div>
-                <div id="sumber-list" class="divide-y divide-slate-100">
-                    <!-- Dynamic Items -->
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= PAGE 3: AI PENDIDIKAN ================= -->
-        <section id="page-ai" class="page-section hidden py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <!-- SUMBER TILES -->
+            <div class="section-header">
                 <div>
-                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Kecerdasan Buatan Dalam Pengajaran</span>
-                    <h1 class="text-3xl font-extrabold text-ipgNavy tracking-tight">AI Pendidikan Hub</h1>
-                    <p class="text-slate-600 text-sm mt-1">Himpunan aplikasi Kecerdasan Buatan (AI) percuma dan berkuasa untuk pembinaan RPP, analisis data, kajian tindakan dan perekaan grafik.</p>
-                </div>
-                <div class="bg-emerald-50 text-emerald-800 text-xs font-semibold px-4 py-2 rounded-xl border border-emerald-200 flex items-center space-x-2">
-                    <i class="fa-solid fa-lightbulb text-emerald-600"></i>
-                    <span>Sesuai untuk Pelajar PISP & Guru Pelatih</span>
+                    <h2>Sumber Pelajar PISP</h2>
+                    <p>Akses terus kepada sistem tugasan, enjin carian akademik dan sumber rujukan pelajar.</p>
                 </div>
             </div>
-
-            <!-- AI Tools Grid -->
-            <div id="ai-tools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- AI Tools rendered via JavaScript -->
+            <div class="tiles-grid" id="student-resources-container">
+                <!-- Dynamic Tiles Grid -->
             </div>
-        </section>
+        </div>
 
-        <!-- ================= PAGE 4: RUJUKAN AKADEMIK ================= -->
-        <section id="page-rujukan" class="page-section hidden py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="mb-8">
-                <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Pangkalan Data & Jurnal Akademik</span>
-                <h1 class="text-3xl font-extrabold text-ipgNavy tracking-tight">Portal Rujukan Ilmiah</h1>
-                <p class="text-slate-600 text-sm mt-1">Akses kepada repositori jurnal terindeks, tesis, dan direktori rujukan akademik diiktiraf untuk tugasan dan Kajian Tindakan PISP.</p>
+        <!-- VIEW: PERPUSTAKAAN AWAM -->
+        <div id="view-perpustakaan" class="view-section d-none">
+            <div class="section-header">
+                <div>
+                    <h2>Perpustakaan Universiti Awam</h2>
+                    <p>Akses direktori perpustakaan digital Universiti Awam di Malaysia</p>
+                </div>
             </div>
 
-            <div id="rujukan-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Academic Platforms rendered via JS -->
+            <div class="controls-bar">
+                <div class="input-group" style="max-width: 400px;">
+                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" id="libSearchInput" class="form-control border-start-0" placeholder="Cari universiti..." onkeyup="filterLibraries()">
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted small fw-semibold">Susun:</span>
+                    <button class="btn btn-sm btn-pisp-outline" onclick="sortLibraries('asc')"><i class="fa-solid fa-arrow-down-a-z me-1"></i>A-Z</button>
+                    <button class="btn btn-sm btn-pisp-outline" onclick="sortLibraries('desc')"><i class="fa-solid fa-arrow-up-z-a me-1"></i>Z-A</button>
+                </div>
             </div>
-        </section>
+
+            <div class="tiles-grid" id="libraries-container">
+                <!-- Dynamic Libraries Tiles -->
+            </div>
+        </div>
+
+        <!-- VIEW: RUJUKAN AKADEMIK -->
+        <div id="view-rujukan" class="view-section d-none">
+            <div class="section-header">
+                <div>
+                    <h2>Portal Rujukan Ilmiah</h2>
+                    <p>Akses kepada pangkalan data, jurnal, tesis dan sumber akademik terpilih.</p>
+                </div>
+            </div>
+
+            <div class="controls-bar">
+                <div class="input-group" style="max-width: 400px;">
+                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" id="refSearchInput" class="form-control border-start-0" placeholder="Cari pangkalan data..." onkeyup="filterReferences()">
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted small fw-semibold">Susun:</span>
+                    <button class="btn btn-sm btn-pisp-outline" onclick="sortReferences('asc')"><i class="fa-solid fa-arrow-down-a-z me-1"></i>A-Z</button>
+                    <button class="btn btn-sm btn-pisp-outline" onclick="sortReferences('desc')"><i class="fa-solid fa-arrow-up-z-a me-1"></i>Z-A</button>
+                </div>
+            </div>
+
+            <div class="tiles-grid" id="references-container">
+                <!-- Dynamic References Tiles -->
+            </div>
+        </div>
+
+        <!-- VIEW: AI PENDIDIKAN -->
+        <div id="view-ai" class="view-section d-none">
+            <div class="section-header">
+                <div>
+                    <h2>AI Pendidikan Hub</h2>
+                    <p>Himpunan alatan Kecerdasan Buatan (AI) untuk analisis, penulisan, penyelidikan dan reka bentuk.</p>
+                </div>
+            </div>
+
+            <div class="controls-bar">
+                <div class="input-group" style="max-width: 400px;">
+                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" id="aiSearchInput" class="form-control border-start-0" placeholder="Cari alatan AI..." onkeyup="filterAI()">
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted small fw-semibold">Susun:</span>
+                    <button class="btn btn-sm btn-pisp-outline" onclick="sortAI('asc')"><i class="fa-solid fa-arrow-down-a-z me-1"></i>A-Z</button>
+                    <button class="btn btn-sm btn-pisp-outline" onclick="sortAI('desc')"><i class="fa-solid fa-arrow-up-z-a me-1"></i>Z-A</button>
+                </div>
+            </div>
+
+            <div class="tiles-grid" id="ai-container">
+                <!-- Dynamic AI Tiles -->
+            </div>
+        </div>
+
+        <!-- VIEW: ADMIN PORTAL -->
+        <div id="view-admin" class="view-section d-none">
+            
+            <!-- ADMIN LOGIN CONTAINER -->
+            <div id="admin-login-card" class="row justify-content-center py-4">
+                <div class="col-md-5 col-lg-4">
+                    <div class="glass-card p-4 p-md-5">
+                        <div class="text-center mb-4">
+                            <div class="rounded-circle d-inline-flex p-3 mb-2" style="background-color: var(--pisp-btn-secondary); color: var(--pisp-btn-primary);">
+                                <i class="fa-solid fa-user-shield fs-2"></i>
+                            </div>
+                            <h4 class="fw-bold" style="font-family: var(--font-serif-heading); color: var(--pisp-text-headline);">Log Masuk Admin</h4>
+                            <p class="text-muted small">Portal Pengurusan PISP Digital Hub</p>
+                        </div>
+
+                        <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold">ID Admin</label>
+                                <input type="text" id="adminUsername" class="form-control" placeholder="Masukkan ID Admin" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small fw-semibold">Kata Laluan</label>
+                                <input type="password" id="adminPassword" class="form-control" placeholder="••••••••" required>
+                            </div>
+                            <button type="submit" id="btnLoginSubmit" class="btn btn-pisp-primary w-100 py-2">
+                                <i class="fa-solid fa-right-to-bracket"></i> Log Masuk Portal Admin
+                            </button>
+                        </form>
+                        <div id="loginAlert" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN DASHBOARD CONTAINER -->
+            <div id="admin-dashboard-layout" class="d-none">
+                <div class="d-flex justify-content-between align-items-center mb-4 glass-card p-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <h4 class="fw-bold m-0" style="font-family: var(--font-serif-heading); color: var(--pisp-text-headline);"><i class="fa-solid fa-gauge me-2"></i>Dashboard Pengurusan Admin</h4>
+                        <span id="backendStatusBadge" class="status-badge error"><i class="fa-solid fa-circle text-danger"></i> Checking Backend...</span>
+                    </div>
+                    <button class="btn btn-outline-danger btn-sm rounded-1 px-3" onclick="handleAdminLogout()">
+                        <i class="fa-solid fa-power-off me-1"></i> Log Keluar
+                    </button>
+                </div>
+
+                <div class="row g-3">
+                    <!-- Admin Sidebar -->
+                    <div class="col-md-3">
+                        <div class="admin-sidebar">
+                            <div class="px-3 pb-2 mb-2 border-bottom border-secondary-subtle text-muted small fw-semibold" style="letter-spacing: 1px;">MODUL PENGURUSAN</div>
+                            <div class="admin-nav-item active" onclick="switchAdminTab('announcements', this)"><i class="fa-solid fa-bullhorn w-20"></i> Pengumuman</div>
+                            <div class="admin-nav-item" onclick="switchAdminTab('portal', this)"><i class="fa-solid fa-layer-group w-20"></i> Portal Utama</div>
+                            <div class="admin-nav-item" onclick="switchAdminTab('studentResources', this)"><i class="fa-solid fa-folder-open w-20"></i> Sumber Pelajar</div>
+                            <div class="admin-nav-item" onclick="switchAdminTab('libraries', this)"><i class="fa-solid fa-book-atlas w-20"></i> Perpustakaan Awam</div>
+                            <div class="admin-nav-item" onclick="switchAdminTab('academicReferences', this)"><i class="fa-solid fa-book-journal-whills w-20"></i> Rujukan Akademik</div>
+                            <div class="admin-nav-item" onclick="switchAdminTab('ai', this)"><i class="fa-solid fa-robot w-20"></i> AI Pendidikan</div>
+                            <div class="admin-nav-item" onclick="switchAdminTab('config', this)"><i class="fa-solid fa-gear w-20"></i> Konfigurasi API</div>
+                        </div>
+                    </div>
+
+                    <!-- Admin Main Panel -->
+                    <div class="col-md-9">
+                        <div class="glass-card p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="fw-bold m-0" id="adminTabTitle" style="font-family: var(--font-serif-heading); color: var(--pisp-text-headline);">Pengurusan Pengumuman</h5>
+                                <button class="btn btn-pisp-primary btn-sm" id="btnAdminAdd" onclick="openCrudModal('add')">
+                                    <i class="fa-solid fa-plus me-1"></i> Tambah Rekod
+                                </button>
+                            </div>
+
+                            <!-- CRUD TABLE CONTAINER -->
+                            <div id="adminCrudContent">
+                                <div class="mb-3">
+                                    <input type="text" id="adminTableSearch" class="form-control form-control-sm" placeholder="Cari dalam senarai admin..." onkeyup="filterAdminTable()">
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle small bg-transparent" id="adminCrudTable">
+                                        <thead>
+                                            <tr id="adminTableHeader" class="table-light">
+                                                <!-- Dynamic Headers -->
+                                            </tr>
+                                        </thead>
+                                        <tbody id="adminTableBody">
+                                            <!-- Dynamic Rows -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- CONFIGURATION PANEL -->
+                            <div id="adminConfigContent" class="d-none">
+                                <div class="alert alert-secondary border-0 p-3 mb-4" style="background-color: var(--pisp-btn-secondary); color: var(--pisp-text-headline);">
+                                    <h6 class="fw-bold mb-2"><i class="fa-solid fa-sliders me-2"></i>Tetapan Konfigurasi API</h6>
+                                    <p class="small mb-0">Masukkan pautan Google Apps Script Web App untuk menyambungkan pangkalan data Google Sheets dengan aplikasi web ini.</p>
+                                </div>
+
+                                <div class="bg-dark text-light p-3 rounded mb-4 font-monospace extra-small position-relative">
+                                    <div class="text-secondary mb-1">// KONFIGURASI UTAMA</div>
+                                    <div class="text-warning fw-bold">const API_URL = "<span id="displayApiUrl">PASTE_APPS_SCRIPT_URL</span>";</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Pautan Google Apps Script Web App (API_URL)</label>
+                                    <div class="input-group">
+                                        <input type="url" id="inputApiUrl" class="form-control" placeholder="https://script.google.com/macros/s/.../exec">
+                                        <button class="btn btn-pisp-primary" onclick="saveApiUrlConfig()">
+                                            <i class="fa-solid fa-floppy-disk me-1"></i> Simpan URL
+                                        </button>
+                                    </div>
+                                    <div class="form-text small text-muted">Aplikasi akan menggunakan URL ini secara automatik untuk membaca dan mengemaskini data.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-ipgNavy text-white mt-16 border-t border-slate-800 py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-400">
-            &copy; 2026 Zariff Legacy. Hak Cipta Terpelihara.
+    <footer>
+        <div class="container">
+            © 2026 Zariff Legacy. Hak Cipta Terpelihara.
         </div>
     </footer>
 
-    <!-- ================= MODALS & TOAST NOTIFICATIONS ================= -->
-
-    <!-- Admin Login / Control Dashboard Modal -->
-    <div id="admin-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200">
-            <!-- Modal Header -->
-            <div class="bg-ipgNavy text-white p-6 flex justify-between items-center rounded-t-3xl">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-ipgGold text-ipgNavy rounded-xl flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-user-shield"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold" id="admin-modal-title">Log Masuk Pentadbir (Admin)</h3>
-                        <p class="text-xs text-slate-300">Kemaskini data pengumuman, pautan & akaun admin</p>
-                    </div>
+    <!-- CRUD MODAL -->
+    <div class="modal fade" id="crudModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="crudModalTitle" style="font-family: var(--font-serif-heading);">Tambah Rekod</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <button onclick="closeAdminModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <div class="modal-body" id="crudModalBody">
+                    <form id="crudForm">
+                        <input type="hidden" id="crudFormId">
+                        <div id="crudFormFields">
+                            <!-- Dynamic Inputs -->
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-pisp-outline btn-sm" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-pisp-primary btn-sm" onclick="submitCrudForm()">Simpan Data</button>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Modal Content -->
-            <div class="p-6">
-                <!-- Login Screen (Shown when not authenticated) -->
-                <form id="admin-login-view" onsubmit="event.preventDefault(); handleAdminLogin();" class="space-y-4">
-                    <p class="text-xs text-slate-600 bg-amber-50 p-3 rounded-xl border border-amber-200">
-                        <i class="fa-solid fa-circle-info text-amber-500 mr-1"></i> Sila masukkan ID Admin dan kata laluan untuk menguruskan kandungan web.
-                    </p>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">ID Admin</label>
-                        <input type="text" id="admin-id-input" placeholder="Masukkan ID Admin" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-ipgNavy">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Kata Laluan</label>
-                        <input type="password" id="admin-pass-input" placeholder="Masukkan Kata Laluan" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-ipgNavy">
-                    </div>
-                    <button type="submit" class="w-full py-3 bg-ipgNavy hover:bg-ipgBlue text-white font-bold rounded-xl text-sm transition-colors shadow-md">
-                        Log Masuk Portal Admin
-                    </button>
-                </form>
-
-                <!-- Admin Dashboard View (Shown after authentication) -->
-                <div id="admin-dashboard-view" class="hidden space-y-6">
-                    <!-- Admin Navigation Tabs -->
-                    <div class="flex border-b border-slate-200 text-xs font-bold space-x-4 overflow-x-auto pb-1">
-                        <button onclick="switchAdminTab('announcements')" id="admin-tab-announcements" class="pb-2 text-ipgNavy border-b-2 border-ipgNavy whitespace-nowrap">Pengumuman</button>
-                        <button onclick="switchAdminTab('sumber')" id="admin-tab-sumber" class="pb-2 text-slate-400 hover:text-slate-700 whitespace-nowrap">Perpustakaan UA</button>
-                        <button onclick="switchAdminTab('rujukan')" id="admin-tab-rujukan" class="pb-2 text-slate-400 hover:text-slate-700 whitespace-nowrap">Rujukan Akademik</button>
-                        <button onclick="switchAdminTab('ai')" id="admin-tab-ai" class="pb-2 text-slate-400 hover:text-slate-700 whitespace-nowrap">AI Pendidikan</button>
-                        <button onclick="switchAdminTab('banner')" id="admin-tab-banner" class="pb-2 text-slate-400 hover:text-slate-700 whitespace-nowrap">Banner & Pautan Sistem</button>
-                        <button onclick="switchAdminTab('credentials')" id="admin-tab-credentials" class="pb-2 text-slate-400 hover:text-slate-700 whitespace-nowrap">Tukar ID/Katalaluan</button>
-                        <button onclick="switchAdminTab('backend')" id="admin-tab-backend" class="pb-2 text-slate-400 hover:text-slate-700 whitespace-nowrap">Tetapan Backend</button>
-                    </div>
-
-                    <!-- Tab 1: Manage Announcements -->
-                    <div id="admin-panel-announcements" class="space-y-4">
-                        <h4 class="font-bold text-sm text-slate-800">Tambah Pengumuman Baru</h4>
-                        <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <input type="text" id="new-ann-title" placeholder="Tajuk Pengumuman" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            <textarea id="new-ann-desc" placeholder="Kandungan / Butiran Pengumuman..." rows="3" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white"></textarea>
-                            <div class="flex justify-between items-center">
-                                <select id="new-ann-tag" class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white">
-                                    <option value="Penting">Penting</option>
-                                    <option value="Tugasan">Tugasan / iTEMS</option>
-                                    <option value="Hebahan">Hebahan IPGKPI</option>
-                                </select>
-                                <button onclick="addNewAnnouncement()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg transition-colors">
-                                    <i class="fa-solid fa-plus mr-1"></i> Tambah Pengumuman
-                                </button>
-                            </div>
-                        </div>
-
-                        <h4 class="font-bold text-sm text-slate-800 pt-2">Senarai Pengumuman Semasa</h4>
-                        <div id="admin-announcement-list" class="space-y-2 max-h-60 overflow-y-auto pr-1">
-                            <!-- Dynamic Announcement Admin List -->
-                        </div>
-                    </div>
-
-                    <!-- Tab Sumber: Manage Public University Libraries -->
-                    <div id="admin-panel-sumber" class="hidden space-y-4">
-                        <h4 class="font-bold text-sm text-slate-800">Tambah Perpustakaan Universiti Awam Baru</h4>
-                        <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <input type="text" id="new-ua-title" placeholder="Nama Perpustakaan & UA (cth: Perpustakaan Sultan Abdul Samad - UPM)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                                <input type="text" id="new-ua-cat" placeholder="Kategori / Kod (cth: UPM / Universiti Awam)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            </div>
-                            <input type="url" id="new-ua-link" placeholder="URL Pautan Portal/OPAC (cth: https://lib.upm.edu.my)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            <div class="flex justify-end">
-                                <button onclick="addNewUaLibrary()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg transition-colors">
-                                    <i class="fa-solid fa-plus mr-1"></i> Tambah Perpustakaan
-                                </button>
-                            </div>
-                        </div>
-
-                        <h4 class="font-bold text-sm text-slate-800 pt-2">Kemaskini Pautan & Senarai Perpustakaan UA</h4>
-                        <div id="admin-sumber-list" class="space-y-3 max-h-64 overflow-y-auto pr-1">
-                            <!-- Dynamic UA Library Admin List -->
-                        </div>
-                    </div>
-
-                    <!-- Tab Rujukan: Manage Academic References -->
-                    <div id="admin-panel-rujukan" class="hidden space-y-4">
-                        <h4 class="font-bold text-sm text-slate-800">Tambah Rujukan Akademik Baru</h4>
-                        <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <input type="text" id="new-ref-name" placeholder="Nama Rujukan (contoh: Scopus)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                                <input type="text" id="new-ref-type" placeholder="Kategori (contoh: Pangkalan Data)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            </div>
-                            <input type="url" id="new-ref-url" placeholder="URL Pautan (contoh: https://...)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            <textarea id="new-ref-desc" placeholder="Penerangan Ringkas Rujukan..." rows="2" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white"></textarea>
-                            <div class="flex justify-between items-center">
-                                <select id="new-ref-color" class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white">
-                                    <option value="bg-blue-600">Warna Biru</option>
-                                    <option value="bg-emerald-600">Warna Hijau</option>
-                                    <option value="bg-amber-600">Warna Emas/Kuning</option>
-                                    <option value="bg-rose-600">Warna Merah</option>
-                                    <option value="bg-indigo-600">Warna Nila</option>
-                                    <option value="bg-purple-600">Warna Ungu</option>
-                                    <option value="bg-teal-600">Warna Teal</option>
-                                    <option value="bg-sky-600">Warna Sky Blue</option>
-                                </select>
-                                <button onclick="addNewRujukan()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg transition-colors">
-                                    <i class="fa-solid fa-plus mr-1"></i> Tambah Rujukan
-                                </button>
-                            </div>
-                        </div>
-
-                        <h4 class="font-bold text-sm text-slate-800 pt-2">Kemaskini Pautan & Senarai Rujukan</h4>
-                        <div id="admin-rujukan-list" class="space-y-3 max-h-64 overflow-y-auto pr-1">
-                            <!-- Dynamic Rujukan Admin List -->
-                        </div>
-                    </div>
-
-                    <!-- Tab AI: Manage AI Pendidikan Tools -->
-                    <div id="admin-panel-ai" class="hidden space-y-4">
-                        <h4 class="font-bold text-sm text-slate-800">Tambah Alat AI Pendidikan Baru</h4>
-                        <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <input type="text" id="new-ai-name" placeholder="Nama AI (contoh: Poe AI)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                                <input type="text" id="new-ai-cat" placeholder="Kategori (contoh: Penulisan & RPP)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            </div>
-                            <input type="url" id="new-ai-url" placeholder="URL Pautan (contoh: https://poe.com)" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            <textarea id="new-ai-desc" placeholder="Penerangan Ringkas Fungsi AI..." rows="2" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white"></textarea>
-                            <div class="flex justify-between items-center">
-                                <select id="new-ai-icon" class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white">
-                                    <option value="fa-robot">Ikon Robot</option>
-                                    <option value="fa-brain">Ikon Minda / Brain</option>
-                                    <option value="fa-comments">Ikon Chat / Mesej</option>
-                                    <option value="fa-bolt">Ikon Kilat / Fast AI</option>
-                                    <option value="fa-palette">Ikon Lukisan / Grafik</option>
-                                    <option value="fa-music">Ikon Muzik / Audio</option>
-                                    <option value="fa-book-atlas">Ikon Buku / Nota</option>
-                                    <option value="fa-magnifying-glass-chart">Ikon Carian / Analisis</option>
-                                </select>
-                                <button onclick="addNewAITool()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg transition-colors">
-                                    <i class="fa-solid fa-plus mr-1"></i> Tambah AI Baru
-                                </button>
-                            </div>
-                        </div>
-
-                        <h4 class="font-bold text-sm text-slate-800 pt-2">Kemaskini Pautan & Senarai Alat AI</h4>
-                        <div id="admin-ai-list" class="space-y-3 max-h-64 overflow-y-auto pr-1">
-                            <!-- Dynamic AI Admin List -->
-                        </div>
-                    </div>
-
-                    <!-- Tab Banner & Pautan: Edit Hero Banner & System Links -->
-                    <div id="admin-panel-banner" class="hidden space-y-5">
-                        <!-- Subsection: Homepage Hero Banner -->
-                        <div>
-                            <h4 class="font-bold text-sm text-slate-800 border-b pb-1 mb-3 flex items-center space-x-2">
-                                <i class="fa-solid fa-image text-ipgBlue"></i> <span>Kandungan Banner Utama (Homepage)</span>
-                            </h4>
-                            <div class="space-y-3">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Lencana / Sub-tajuk Banner</label>
-                                    <input type="text" id="update-banner-tag" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Tajuk Utama Banner</label>
-                                    <input type="text" id="update-banner-title" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Penerangan Banner</label>
-                                    <textarea id="update-banner-desc" rows="2" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Subsection: Homepage Quick Links -->
-                        <div>
-                            <h4 class="font-bold text-sm text-slate-800 border-b pb-1 mb-3 flex items-center space-x-2">
-                                <i class="fa-solid fa-link text-amber-500"></i> <span>Pautan Portal Utama (Laman Utama)</span>
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">
-                                        <i class="fa-solid fa-laptop-code text-blue-500 mr-1"></i>URL iTEMS (Utama)
-                                    </label>
-                                    <input type="url" id="update-items-url" placeholder="https://items.moe.gov.my/umum/" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">
-                                        <i class="fa-solid fa-building-columns text-emerald-500 mr-1"></i>URL IPGKPI
-                                    </label>
-                                    <input type="url" id="update-ipgkpi-url" placeholder="https://ipgkpi.moe.edu.my" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">
-                                        <i class="fa-solid fa-book-reader text-amber-600 mr-1"></i>URL Pusat Sumber (Utama)
-                                    </label>
-                                    <input type="url" id="update-psag-url" placeholder="http://psagipgkpi.blogspot.com/" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">
-                                        <i class="fa-brands fa-facebook text-blue-600 mr-1"></i>URL Facebook IPGKPI
-                                    </label>
-                                    <input type="url" id="update-fb-url" placeholder="https://www.facebook.com/..." class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Subsection: Sumber Pelajar Quick Link Cards -->
-                        <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-200">
-                            <h4 class="font-bold text-sm text-slate-800 border-b border-amber-200 pb-1 mb-3 flex items-center space-x-2">
-                                <i class="fa-solid fa-folder-open text-amber-600"></i> <span>Pautan Terus Sistem (Menu Sumber Pelajar)</span>
-                            </h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-1">
-                                        <i class="fa-solid fa-chalkboard text-emerald-600 mr-1"></i>URL Google Classroom
-                                    </label>
-                                    <input type="url" id="update-sumber-classroom-url" placeholder="https://classroom.google.com" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-1">
-                                        <i class="fa-solid fa-laptop-code text-blue-600 mr-1"></i>URL Sistem iTEMS (Sumber Pelajar)
-                                    </label>
-                                    <input type="url" id="update-sumber-items-url" placeholder="https://items.moe.gov.my/umum/" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-1">
-                                        <i class="fa-solid fa-book-open text-amber-600 mr-1"></i>URL Pusat Sumber al-Ghazali
-                                    </label>
-                                    <input type="url" id="update-sumber-psag-url" placeholder="http://psagipgkpi.blogspot.com/" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-700 mb-1">
-                                        <i class="fa-solid fa-graduation-cap text-purple-600 mr-1"></i>URL Portal DELIMa
-                                    </label>
-                                    <input type="url" id="update-sumber-delima-url" placeholder="https://delima.moe-dl.edu.my" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white">
-                                </div>
-                            </div>
-                        </div>
-
-                        <button onclick="saveBannerSettings()" class="w-full py-2.5 bg-ipgNavy hover:bg-ipgBlue text-white font-bold text-xs rounded-xl transition-colors shadow-sm flex items-center justify-center space-x-2">
-                            <i class="fa-solid fa-floppy-disk"></i>
-                            <span>Simpan Semua Perubahan Banner & Pautan</span>
-                        </button>
-                    </div>
-
-                    <!-- Tab 2: Update Credentials -->
-                    <div id="admin-panel-credentials" class="hidden space-y-4">
-                        <h4 class="font-bold text-sm text-slate-800">Kemaskini Akaun Pentadbir</h4>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">ID Admin Baru</label>
-                            <input type="text" id="update-admin-id" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Kata Laluan Baru</label>
-                            <input type="password" id="update-admin-pass" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300">
-                        </div>
-                        <button onclick="saveAdminCredentials()" class="px-4 py-2 bg-ipgNavy hover:bg-ipgBlue text-white font-bold text-xs rounded-lg transition-colors">
-                            Simpan Perubahan ID & Katalaluan
-                        </button>
-                    </div>
-
-                    <!-- Tab 3: Google Sheets Apps Script Info -->
-                    <div id="admin-panel-backend" class="hidden space-y-3">
-                        <h4 class="font-bold text-sm text-slate-800">Konfigurasi Google Apps Script URL</h4>
-                        <p class="text-xs text-slate-500">Masukkan URL Web App Google Apps Script anda di bawah untuk penyelarasan Google Sheet.</p>
-                        <input type="text" id="apps-script-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300">
-                        <button onclick="saveAppsScriptUrl()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg transition-colors">
-                            Simpan API URL
-                        </button>
-                    </div>
-
-                    <div class="pt-4 border-t border-slate-200 flex justify-between items-center">
-                        <span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-check-circle mr-1"></i> Sesi Admin Aktif</span>
-                        <button onclick="handleAdminLogout()" class="px-3 py-1.5 text-xs text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg font-bold transition-colors">
-                            Log Keluar
-                        </button>
+    <!-- DELETE CONFIRMATION MODAL -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center p-4">
+                    <i class="fa-solid fa-triangle-exclamation text-danger fs-1 mb-3"></i>
+                    <h6 class="fw-bold mb-2" style="font-family: var(--font-serif-heading);">Padam Rekod Ini?</h6>
+                    <p class="text-muted extra-small mb-4">Tindakan ini tidak boleh dibatalkan.</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-pisp-outline btn-sm px-3" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-danger btn-sm px-3 rounded-1" onclick="confirmDeleteExec()">Ya, Padam</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Confirmation Modal (Strictly replacing alert/confirm) -->
-    <div id="confirm-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 text-center border border-slate-100">
-            <div class="w-14 h-14 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-            </div>
-            <h3 class="text-base font-bold text-slate-900" id="confirm-title">Pengesahan Padam</h3>
-            <p class="text-xs text-slate-500 my-2" id="confirm-message">Adakah anda pasti mahu memadam item ini? Tindakan ini tidak boleh dibatalkan.</p>
-            <div class="flex justify-center space-x-3 mt-5">
-                <button id="confirm-cancel-btn" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-colors">
-                    Batal
-                </button>
-                <button id="confirm-ok-btn" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl transition-colors shadow-md">
-                    Ya, Padam
-                </button>
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090;">
+        <div id="liveToast" class="toast align-items-center text-bg-dark border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">
+                    Operasi berjaya.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     </div>
 
-    <!-- Custom Floating Toast Notification -->
-    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        /*
-        KONFIGURASI:
-        - Sediakan ruang
-        untuk meletakkan:
-        const API_URL =
-        "PASTE_APPS_SCRIPT_URL";
-        */
-        const API_URL = "https://script.google.com/macros/s/AKfycbx9rc0RT7136236I_IOsi5TSkEIvKlhzRE4kogKtPt9rVtYfjvVdbQV12n0_oalwcdQTg/exec";
-
-        const defaultUaLibraries = [
-            { id: 1, title: "Perpustakaan Utama Universiti Malaya (UM)", category: "UM", link: "https://umlib.um.edu.my" },
-            { id: 2, title: "Perpustakaan Tun Seri Lanang (UKM)", category: "UKM", link: "https://www.ukm.my/perpustakaan" },
-            { id: 3, title: "Perpustakaan Universiti Sains Malaysia (USM)", category: "USM", link: "https://limse.usm.my" },
-            { id: 4, title: "Perpustakaan Sultan Abdul Samad (UPM)", category: "UPM", link: "https://lib.upm.edu.my" },
-            { id: 5, title: "Perpustakaan Sultanah Zanariah (UTM)", category: "UTM", link: "https://library.utm.my" },
-            { id: 6, title: "Perpustakaan Tun Abdul Razak (UiTM)", category: "UiTM", link: "https://library.uitm.edu.my" },
-            { id: 7, title: "Perpustakaan Tuanku Bainun (UPSI)", category: "UPSI", link: "https://pustaka.upsi.edu.my" },
-            { id: 8, title: "Perpustakaan Sultanah Bahiyah (UUM)", category: "UUM", link: "https://library.uum.edu.my" },
-            { id: 9, title: "Perpustakaan Universiti Islam Antarabangsa Malaysia (UIAM)", category: "UIAM", link: "https://www.iium.edu.my/office/library" },
-            { id: 10, title: "Perpustakaan Universiti Malaysia Sarawak (UNIMAS)", category: "UNIMAS", link: "https://www.caiss.unimas.my" },
-            { id: 11, title: "Perpustakaan Universiti Malaysia Sabah (UMS)", category: "UMS", link: "https://www.ums.edu.my/pustaka" },
-            { id: 12, title: "Perpustakaan Universiti Sains Islam Malaysia (USIM)", category: "USIM", link: "https://pustaka.usim.edu.my" }
-        ];
-
-        const defaultRujukanData = [
-            { id: 1, name: "EBSCOhost", type: "Pangkalan Data Jurnal", desc: "Akses artikel ilmiah antarabangsa, buku elektronik dan repositori penyelidikan pendidikan.", icon: "fa-database", color: "bg-blue-600", url: "https://search.ebscohost.com" },
-            { id: 2, name: "Emerald Insight", type: "Jurnal Pengurusan & Pendidikan", desc: "Koleksi jurnal penyelidikan pengurusan, pedagogi dan kepimpinan sekolah.", icon: "fa-book-open-reader", color: "bg-emerald-600", url: "https://www.emerald.com/insight/" },
-            { id: 3, name: "ALMANHAL", type: "Rujukan Bahasa & Pengajian Islam", desc: "Pangkalan data digital kandungan akademik Bahasa Arab dan Tamadun Islam.", icon: "fa-kaaba", color: "bg-amber-600", url: "https://platform.almanhal.com" },
-            { id: 4, name: "Turnitin", type: "Penyemak Plagiarisme", desc: "Sistem pengesahan keaslian penulisan ilmiah dan tugasan kerja kursus IPG.", icon: "fa-file-circle-check", color: "bg-rose-600", url: "https://www.turnitin.com" },
-            { id: 5, name: "u-Pustaka", type: "Perpustakaan Digital Negara", desc: "Portal perkhidmatan u-Pustaka Perpustakaan Negara Malaysia (PNM).", icon: "fa-landmark", color: "bg-indigo-600", url: "https://www.u-pustaka.gov.my" },
-            { id: 6, name: "Mysitasi", type: "Indeks Sitasi Malaysia", desc: "Sistem sitasi jurnal akademik tempatan yang diterbitkan oleh institusi Malaysia.", icon: "fa-quote-right", color: "bg-purple-600", url: "https://mycite.my" },
-            { id: 7, name: "DOAJ", type: "Directory of Open Access Journals", desc: "Direktori jurnal akses terbuka berkualiti tinggi dari seluruh dunia.", icon: "fa-folder-tree", color: "bg-teal-600", url: "https://doaj.org" },
-            { id: 8, name: "ERIC", type: "Educational Resources Info Center", desc: "Perpustakaan dalam talian terbesar untuk penyelidikan dan maklumat pendidikan.", icon: "fa-graduation-cap", color: "bg-sky-600", url: "https://eric.ed.gov" }
-        ];
-
-        /* Default In-Memory AI Tools Data */
-        const defaultAiToolsData = [
-            { id: 1, name: "ChatGPT", category: "Penulisan & RPP", desc: "Model bahasa utama untuk sumbang saran idea pengajaran, perancangan RPH dan penyuntingan teks.", icon: "fa-comments", color: "text-emerald-500", url: "https://chatgpt.com" },
-            { id: 2, name: "Gemini", category: "Kecerdasan Buatan Google", desc: "AI serbaboleh berintegrasi Google Workspace untuk analisis dokumen dan carian maklumat akademik.", icon: "fa-bolt", color: "text-blue-500", url: "https://gemini.google.com" },
-            { id: 3, name: "Gemini Notebook (NotebookLM)", category: "Nota & Rujukan", desc: "Pembantu nota AI daripada Google yang membantu menganalisis dokumen kajian tindakan dan PDF.", icon: "fa-book-atlas", color: "text-indigo-500", url: "https://notebooklm.google.com" },
-            { id: 4, name: "Claude", category: "Analisis & Sintesis", desc: "Sesuai untuk analisis teks panjang, penyemakan sintaksis bahasa, dan ulasan penulisan ilmiah.", icon: "fa-brain", color: "text-amber-600", url: "https://claude.ai" },
-            { id: 5, name: "Canva AI", category: "Reka Bentuk BBM", desc: "Penaik taraf Bahan Bantu Mengajar (BBM), slaid pembentangan interaktif dan visual grafik.", icon: "fa-palette", color: "text-purple-500", url: "https://www.canva.com" },
-            { id: 6, name: "Grok", category: "Generasi Maklumat Masa-Nyata", desc: "Model AI canggih oleh xAI untuk analisis data ringkas dan jawapan pantas.", icon: "fa-atom", color: "text-slate-800", url: "https://x.ai" },
-            { id: 7, name: "Meta AI", category: "Pembantu Sosial & Teks", desc: "Sistem kecerdasan buatan berintegrasi untuk perbincangan idea dan generasi imej.", icon: "fa-circle-nodes", color: "text-blue-600", url: "https://www.meta.ai" },
-            { id: 8, name: "Perplexity", category: "Carian Akademik Berpetikan", desc: "Enjin jawapan AI berserta sumber petikan rujukan berwibawa khas untuk carian tesis.", icon: "fa-magnifying-glass-chart", color: "text-cyan-600", url: "https://www.perplexity.ai" },
-            { id: 9, name: "Suno AI", category: "Audio & Lagu Pendidikan", desc: "Penjana muzikal dan lagu kanak-kanak AI untuk Bahan Bantu Mengajar (BBM) Didik Hibur.", icon: "fa-music", color: "text-rose-500", url: "https://suno.com" },
-            { id: 10, name: "Pixlr AI", category: "Editor Grafik & Foto", desc: "Pengeditan gambar pantas, pembuang latar belakang foto aktiviti sekolah berasaskan AI.", icon: "fa-image", color: "text-teal-500", url: "https://pixlr.com" },
-            { id: 11, name: "Flow (Google Flow)", category: "Aliran Kerja AI", desc: "Platform automasi dan aliran proses berasaskan kecerdasan buatan moden.", icon: "fa-diagram-project", color: "text-sky-500", url: "https://flow.google.com" },
-            { id: 12, name: "SpaceX AI", category: "Inovasi & Teknologi", desc: "Portal AI teknologi maju dan penyelidikan sains futuristik.", icon: "fa-rocket", color: "text-slate-900", url: "https://www.spacex.com" }
-        ];
-
-        /* Default In-Memory / Local Storage State */
-        let state = {
-            adminId: "admin",
-            adminPass: "ipgkpi123",
-            isLoggedIn: false,
-            appsScriptUrl: API_URL,
-            banner: {
-                tag: "Portal Utama Pelajar PISP IPGKPI",
-                title: "Pusat Sumber & Digital Hub Keguruan",
-                desc: "Aplikasi sehenti integrasi sumber pembelajaran, carian akademik rujukan, peranti AI pendidikan moden, dan pautan portal rasmi IPG Kampus Pendidikan Islam Bangi.",
-                itemsUrl: "https://items.moe.gov.my/umum/",
-                ipgkpiUrl: "https://ipgkpi.moe.edu.my",
-                psagUrl: "http://psagipgkpi.blogspot.com/",
-                fbUrl: "https://www.facebook.com/ipgkampuspendidikanislam/?locale=ms_MY"
-            },
-            sumberLinks: {
-                classroomUrl: "https://classroom.google.com",
-                itemsUrl: "https://items.moe.gov.my/umum/",
-                psagUrl: "http://psagipgkpi.blogspot.com/",
-                delimaUrl: "https://delima.moe-dl.edu.my"
-            },
-            announcements: [
-                {
-                    id: 1,
-                    title: "Penyerahan Kerja Kursus PISP Semester 1 & 2 (iTEMS)",
-                    desc: "Semua pelajar dikehendaki memuat naik tugasan kerja kursus ke dalam portal iTEMS sebelum tarikh akhir yang ditetapkan oleh Jabatan.",
-                    tag: "Penting",
-                    date: "18 Ogos 2026"
-                },
-                {
-                    id: 2,
-                    title: "Taklimat Praktikum Fasa 1 & 2 IPGKPI",
-                    desc: "Satu sesi taklimat persediaan Praktikum dan Bina Insan Guru (BIG) akan diadakan di Dewan Al-Ghazali.",
-                    tag: "Hebahan",
-                    date: "15 Ogos 2026"
-                },
-                {
-                    id: 3,
-                    title: "Pendaftaran Akses Pangkalan Data EBSCOhost & u-Pustaka",
-                    desc: "Sila rujuk jawatankuasa Pusat Sumber al-Ghazali IPGKPI untuk mendapatkan kod laluan portal u-Pustaka terbaharu.",
-                    tag: "Tugasan",
-                    date: "10 Ogos 2026"
-                }
-            ],
-            sumberPelajar: defaultUaLibraries,
-            rujukan: defaultRujukanData,
-            aiTools: defaultAiToolsData
+        /**
+         * PISP DIGITAL HUB - APPLICATION CONFIG & BACKEND CONNECTIVITY
+         */
+        const API_URL = localStorage.getItem('PISP_API_URL') || "";
+        const CONFIG = {
+            API_URL: API_URL,
+            SESSION_TIMEOUT_MINS: 30
         };
 
-        window.addEventListener('DOMContentLoaded', () => {
-            loadStoredState();
-            renderHeroBanner();
-            renderAnnouncements();
-            renderAITools();
-            renderRujukan();
-            renderSumberPelajar();
-        });
+        // GLOBAL STATE
+        let appState = {
+            announcements: [],
+            portal: [],
+            studentResources: [],
+            libraries: [],
+            academicReferences: [],
+            ai: [],
+            adminSession: null,
+            activeAdminType: 'announcements',
+            itemToDeleteId: null
+        };
 
-        function navigateTo(pageId) {
-            const pages = document.querySelectorAll('.page-section');
-            pages.forEach(page => page.classList.add('hidden'));
-            
-            const target = document.getElementById(`page-${pageId}`);
-            if (target) target.classList.remove('hidden');
+        // DEFAULT CATALOG DATA
+        const INITIAL_DATA = {
+            portal: [
+                { id: "p1", name: "iTEMS", description: "Sistem pengurusan peperiksaan rasmi IPGM.", icon: "fa-solid fa-file-signature", url: "https://items.moe.gov.my/", status: "Active" },
+                { id: "p2", name: "IPGKPI", description: "Portal rasmi IPG Kampus Pendidikan Islam.", icon: "fa-solid fa-building-columns", url: "https://ipgkpi.moe.edu.my/", status: "Active" },
+                { id: "p3", name: "Pusat Sumber al-Ghazali", description: "Portal pusat sumber IPGKPI.", icon: "fa-solid fa-book-bookmark", url: "https://ipgkpi.moe.edu.my/pusat-sumber/", status: "Active" },
+                { id: "p4", name: "Facebook IPGKPI", description: "Halaman media sosial rasmi IPGKPI.", icon: "fa-brands fa-facebook", url: "https://www.facebook.com/ipgkpi.official/", status: "Active" }
+            ],
+            studentResources: [
+                { id: "sr1", name: "Google Classroom", description: "Platform pengurusan pembelajaran dan serahan tugasan.", icon: "fa-solid fa-chalkboard-user", url: "https://classroom.google.com/", status: "Active" },
+                { id: "sr2", name: "iTEMS", description: "Sistem pentaksiran dan peperiksaan pelajar.", icon: "fa-solid fa-clipboard-check", url: "https://items.moe.gov.my/", status: "Active" },
+                { id: "sr3", name: "DELIMa", description: "Digital Educational Learning Initiative Malaysia.", icon: "fa-solid fa-graduation-cap", url: "https://sites.google.com/moe-dl.edu.my/delima", status: "Active" },
+                { id: "sr4", name: "Google Drive", description: "Penyimpanan awan tugasan dan nota kuliah.", icon: "fa-brands fa-google-drive", url: "https://drive.google.com/", status: "Active" }
+            ],
+            libraries: [
+                { id: "l1", university: "UPM", library: "Perpustakaan Sultan Abdul Samad", url: "https://lib.upm.edu.my/", status: "Active" },
+                { id: "l2", university: "UKM", library: "Perpustakaan Tun Seri Lanang", url: "https://www.ukm.my/perpustakaan/", status: "Active" },
+                { id: "l3", university: "UM", library: "Perpustakaan Universiti Malaya", url: "https://umlib.um.edu.my/", status: "Active" },
+                { id: "l4", university: "USM", library: "Hamzah Sendut Library", url: "https://mylib.usm.my/", status: "Active" },
+                { id: "l5", university: "UiTM", library: "Perpustakaan Tun Abdul Razak", url: "https://ptar.uitm.edu.my/", status: "Active" }
+            ],
+            academicReferences: [
+                { id: "ar1", name: "Google Scholar", description: "Carian makalah ilmiah, tesis, buku dan abstrak.", icon: "fa-solid fa-graduation-cap", url: "https://scholar.google.com/", status: "Active" },
+                { id: "ar2", name: "Scopus", description: "Pangkalan data sitasi dan abstrak rujukan terkemuka.", icon: "fa-solid fa-database", url: "https://www.scopus.com/", status: "Active" },
+                { id: "ar3", name: "Web of Science", description: "Rangkaian sitasi akademik global.", icon: "fa-solid fa-network-wired", url: "https://www.webofscience.com/", status: "Active" },
+                { id: "ar4", name: "ERIC", description: "Education Resources Information Center.", icon: "fa-solid fa-book", url: "https://eric.ed.gov/", status: "Active" },
+                { id: "ar5", name: "DOAJ", description: "Directory of Open Access Journals.", icon: "fa-solid fa-folder-open", url: "https://doaj.org/", status: "Active" },
+                { id: "ar6", name: "MyJurnal", description: "Pangkalan data jurnal akademik Malaysia.", icon: "fa-solid fa-journal-whills", url: "https://myjurnal.my/", status: "Active" },
+                { id: "ar7", name: "ResearchGate", description: "Rangkaian sosial saintifik dan akademik.", icon: "fa-brands fa-researchgate", url: "https://www.researchgate.net/", status: "Active" },
+                { id: "ar8", name: "Google Books", description: "Indeks teks penuh buku dan prosiding.", icon: "fa-solid fa-book-open", url: "https://books.google.com/", status: "Active" }
+            ],
+            ai: [
+                { id: "ai1", name: "ChatGPT", description: "Model AI untuk penulisan, analisis dan jawapan interaktif.", icon: "fa-solid fa-robot", url: "https://chatgpt.com/", status: "Active" },
+                { id: "ai2", name: "Gemini", description: "Aplikasi AI serba boleh keluaran Google.", icon: "fa-solid fa-sparkles", url: "https://gemini.google.com/", status: "Active" },
+                { id: "ai3", name: "NotebookLM", description: "Ruang kerja nota berasaskan AI kecerdasan buatan.", icon: "fa-solid fa-note-sticky", url: "https://notebooklm.google.com/", status: "Active" },
+                { id: "ai4", name: "Claude", description: "Model AI canggih untuk analisis teks & dokumen.", icon: "fa-solid fa-brain", url: "https://claude.ai/", status: "Active" },
+                { id: "ai5", name: "Canva AI", description: "Rekabentuk grafik dan pembentangan dibantu AI.", icon: "fa-solid fa-palette", url: "https://www.canva.com/", status: "Active" },
+                { id: "ai6", name: "Perplexity", description: "Enjin jawapan penyelidikan berpacukan AI.", icon: "fa-solid fa-magnifying-glass-chart", url: "https://www.perplexity.ai/", status: "Active" }
+            ],
+            announcements: [
+                { id: "an1", title: "Minggu Pendaftaran Kerja Kursus IPGKPI", date: "2026-08-20", description: "Semua pelajar PISP dikehendaki mengemaskini pendaftaran kursus di portal iTEMS.", url: "https://items.moe.gov.my/", status: "Active" }
+            ]
+        };
 
-            const navButtons = document.querySelectorAll('.nav-link');
-            navButtons.forEach(btn => {
-                btn.classList.remove('text-ipgNavy', 'bg-slate-100');
-                btn.classList.add('text-slate-600');
-            });
-
-            const activeBtn = document.getElementById(`nav-${pageId}`);
-            if (activeBtn) {
-                activeBtn.classList.add('text-ipgNavy', 'bg-slate-100');
-                activeBtn.classList.remove('text-slate-600');
+        async function apiCall(action, type, method = 'GET', data = null) {
+            if (!CONFIG.API_URL || !CONFIG.API_URL.startsWith('http')) {
+                return handleLocalFallback(action, type, method, data);
             }
 
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
+            try {
+                let url = `${CONFIG.API_URL}?action=${action}&type=${type}`;
+                let options = { method: method };
+
+                if (data && (method === 'POST' || method === 'PUT' || method === 'DELETE')) {
+                    options.body = JSON.stringify(data);
+                    options.headers = { 'Content-Type': 'text/plain' };
+                }
+
+                const response = await fetch(url, options);
+                const json = await response.json();
+                return json;
+            } catch (err) {
+                console.error("API Call error:", err);
+                return { success: false, message: "Ralat sambungan ke pelayan backend." };
+            }
+        }
+
+        function handleLocalFallback(action, type, method, data) {
+            if (action === 'getData') {
+                return { success: true, data: appState[type] && appState[type].length > 0 ? appState[type] : INITIAL_DATA[type] || [] };
+            }
+            if (action === 'login') {
+                if (data.username === 'admin' && data.password === 'pisp2026') {
+                    return { success: true, token: 'demo-token-' + Date.now(), message: "Log masuk berjaya" };
+                }
+                return { success: false, message: "ID Admin atau kata laluan tidak sah." };
+            }
+            if (action === 'add') {
+                data.id = 'id_' + Date.now();
+                appState[type].push(data);
+                return { success: true, message: "Data berjaya ditambah." };
+            }
+            if (action === 'update') {
+                const idx = appState[type].findIndex(i => i.id === data.id);
+                if (idx !== -1) appState[type][idx] = data;
+                return { success: true, message: "Data berjaya dikemaskini." };
+            }
+            if (action === 'delete') {
+                appState[type] = appState[type].filter(i => i.id !== data.id);
+                return { success: true, message: "Data berjaya dipadam." };
+            }
+            return { success: false, message: "Operasi gagal." };
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            Object.assign(appState, INITIAL_DATA);
+            loadAllPublicData();
+            checkBackendHealth();
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('d-none'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+
+            const target = document.getElementById(`view-${tabId}`);
+            const navTarget = document.getElementById(`nav-${tabId}`);
+            if (target) target.classList.remove('d-none');
+            if (navTarget) navTarget.classList.add('active');
+
+            const navbar = document.getElementById('mainNavbar');
+            if (navbar.classList.contains('show')) {
+                bootstrap.Collapse.getInstance(navbar).hide();
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.toggle('hidden');
+        async function loadAllPublicData() {
+            loadAnnouncements();
+            loadPortal();
+            loadStudentResources();
+            loadLibraries();
+            loadAcademicReferences();
+            loadAI();
         }
 
-        function renderHeroBanner() {
-            const banner = state.banner || {};
-            const sLinks = state.sumberLinks || {};
-            
-            const tagEl = document.getElementById('hero-tag');
-            const titleEl = document.getElementById('hero-title');
-            const descEl = document.getElementById('hero-desc');
+        async function loadAnnouncements() {
+            const container = document.getElementById('announcements-container');
+            container.innerHTML = `<div class="p-4 text-center"><div class="spinner-border spinner-border-sm me-2 text-secondary"></div>Memuatkan pengumuman...</div>`;
 
-            if (tagEl && banner.tag) tagEl.innerHTML = `<i class="fa-solid fa-graduation-cap mr-1"></i> ${escapeHtml(banner.tag)}`;
-            if (titleEl && banner.title) titleEl.innerHTML = escapeHtml(banner.title);
-            if (descEl && banner.desc) descEl.innerHTML = escapeHtml(banner.desc);
-
-            const itemsBtn = document.getElementById('card-items-btn');
-            const ipgkpiBtn = document.getElementById('card-ipgkpi-btn');
-            const psagBtn = document.getElementById('card-psag-btn');
-            const fbBtn = document.getElementById('card-fb-btn');
-
-            if (itemsBtn && banner.itemsUrl) itemsBtn.href = banner.itemsUrl;
-            if (ipgkpiBtn && banner.ipgkpiUrl) ipgkpiBtn.href = banner.ipgkpiUrl;
-            if (psagBtn && banner.psagUrl) psagBtn.href = banner.psagUrl;
-            if (fbBtn && banner.fbUrl) fbBtn.href = banner.fbUrl;
-
-            // Admin inputs setup
-            const tagInput = document.getElementById('update-banner-tag');
-            const titleInput = document.getElementById('update-banner-title');
-            const descInput = document.getElementById('update-banner-desc');
-            const itemsUrlInput = document.getElementById('update-items-url');
-            const ipgkpiUrlInput = document.getElementById('update-ipgkpi-url');
-            const psagUrlInput = document.getElementById('update-psag-url');
-            const fbUrlInput = document.getElementById('update-fb-url');
-
-            if (tagInput) tagInput.value = banner.tag || '';
-            if (titleInput) titleInput.value = banner.title || '';
-            if (descInput) descInput.value = banner.desc || '';
-            if (itemsUrlInput) itemsUrlInput.value = banner.itemsUrl || '';
-            if (ipgkpiUrlInput) ipgkpiUrlInput.value = banner.ipgkpiUrl || '';
-            if (psagUrlInput) psagUrlInput.value = banner.psagUrl || '';
-            if (fbUrlInput) fbUrlInput.value = banner.fbUrl || '';
-
-            // Admin inputs for Sumber Pelajar Links
-            const classroomInput = document.getElementById('update-sumber-classroom-url');
-            const sItemsInput = document.getElementById('update-sumber-items-url');
-            const sPsagInput = document.getElementById('update-sumber-psag-url');
-            const sDelimaInput = document.getElementById('update-sumber-delima-url');
-
-            if (classroomInput) classroomInput.value = sLinks.classroomUrl || 'https://classroom.google.com';
-            if (sItemsInput) sItemsInput.value = sLinks.itemsUrl || 'https://items.moe.gov.my/umum/';
-            if (sPsagInput) sPsagInput.value = sLinks.psagUrl || 'http://psagipgkpi.blogspot.com/';
-            if (sDelimaInput) sDelimaInput.value = sLinks.delimaUrl || 'https://delima.moe-dl.edu.my';
-        }
-
-        function saveBannerSettings() {
-            const tag = document.getElementById('update-banner-tag').value.trim();
-            const title = document.getElementById('update-banner-title').value.trim();
-            const desc = document.getElementById('update-banner-desc').value.trim();
-            const itemsUrl = document.getElementById('update-items-url').value.trim();
-            const ipgkpiUrl = document.getElementById('update-ipgkpi-url').value.trim();
-            const psagUrl = document.getElementById('update-psag-url').value.trim();
-            const fbUrl = document.getElementById('update-fb-url').value.trim();
-
-            const classroomUrl = document.getElementById('update-sumber-classroom-url').value.trim();
-            const sItemsUrl = document.getElementById('update-sumber-items-url').value.trim();
-            const sPsagUrl = document.getElementById('update-sumber-psag-url').value.trim();
-            const sDelimaUrl = document.getElementById('update-sumber-delima-url').value.trim();
-
-            state.banner = {
-                tag: tag || state.banner.tag,
-                title: title || state.banner.title,
-                desc: desc || state.banner.desc,
-                itemsUrl: itemsUrl || state.banner.itemsUrl,
-                ipgkpiUrl: ipgkpiUrl || state.banner.ipgkpiUrl,
-                psagUrl: psagUrl || state.banner.psagUrl,
-                fbUrl: fbUrl || state.banner.fbUrl
-            };
-
-            state.sumberLinks = {
-                classroomUrl: classroomUrl || "https://classroom.google.com",
-                itemsUrl: sItemsUrl || "https://items.moe.gov.my/umum/",
-                psagUrl: sPsagUrl || "http://psagipgkpi.blogspot.com/",
-                delimaUrl: sDelimaUrl || "https://delima.moe-dl.edu.my"
-            };
-
-            saveState();
-            renderHeroBanner();
-            renderSumberPelajar();
-            showToast("Tetapan Banner dan Pautan Sistem berjaya disimpan!", "success");
+            const res = await apiCall('getData', 'announcements');
+            if (res.success && res.data) {
+                appState.announcements = res.data;
+                renderAnnouncements();
+            } else {
+                container.innerHTML = `
+                    <div class="alert alert-warning bg-white border-warning text-center">
+                        <i class="fa-solid fa-triangle-exclamation me-1"></i> Maaf, data tidak dapat dimuatkan.
+                        <br><button class="btn btn-sm btn-pisp-outline mt-2" onclick="loadAnnouncements()">Cuba Lagi</button>
+                    </div>`;
+            }
         }
 
         function renderAnnouncements() {
             const container = document.getElementById('announcements-container');
-            const adminList = document.getElementById('admin-announcement-list');
-
-            if (container) {
-                container.innerHTML = '';
-                if (state.announcements.length === 0) {
-                    container.innerHTML = `<p class="text-xs text-slate-500 italic p-4 text-center">Tiada pengumuman buat masa ini.</p>`;
-                } else {
-                    state.announcements.forEach(item => {
-                        const card = document.createElement('div');
-                        card.className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2 hover:border-slate-300 transition-colors";
-                        
-                        let tagBg = "bg-rose-100 text-rose-700 border-rose-200";
-                        if (item.tag === "Hebahan") tagBg = "bg-blue-100 text-blue-700 border-blue-200";
-                        if (item.tag === "Tugasan") tagBg = "bg-amber-100 text-amber-700 border-amber-200";
-
-                        card.innerHTML = `
-                            <div class="flex items-center justify-between gap-2">
-                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${tagBg}">${escapeHtml(item.tag)}</span>
-                                <span class="text-[11px] text-slate-400 font-medium"><i class="fa-regular fa-clock mr-1"></i>${escapeHtml(item.date)}</span>
-                            </div>
-                            <h3 class="font-bold text-slate-900 text-sm sm:text-base">${escapeHtml(item.title)}</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(item.desc)}</p>
-                        `;
-                        container.appendChild(card);
-                    });
-                }
-            }
-
-            if (adminList) {
-                adminList.innerHTML = '';
-                state.announcements.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = "p-3 bg-white rounded-xl border border-slate-200 text-xs flex justify-between items-center gap-2";
-                    card.innerHTML = `
-                        <div>
-                            <span class="font-bold text-slate-800 block">${escapeHtml(item.title)}</span>
-                            <span class="text-[10px] text-slate-400">${escapeHtml(item.tag)} • ${escapeHtml(item.date)}</span>
-                        </div>
-                        <button onclick="confirmDeleteAnnouncement(${item.id})" class="text-rose-600 hover:text-rose-800 text-xs font-bold px-2 py-1 rounded hover:bg-rose-50 transition-colors shrink-0">
-                            <i class="fa-solid fa-trash mr-1"></i>Padam
-                        </button>
-                    `;
-                    adminList.appendChild(card);
-                });
-            }
-        }
-
-        function addNewAnnouncement() {
-            const title = document.getElementById('new-ann-title').value.trim();
-            const desc = document.getElementById('new-ann-desc').value.trim();
-            const tag = document.getElementById('new-ann-tag').value;
-
-            if (!title || !desc) {
-                showToast("Sila lengkapkan Tajuk dan Kandungan pengumuman.", "error");
+            if (!appState.announcements || appState.announcements.length === 0) {
+                container.innerHTML = `<div class="text-muted p-3 text-center glass-card">Tiada pengumuman baharu pada masa ini.</div>`;
                 return;
             }
 
-            const today = new Date();
-            const dateStr = today.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
-
-            const newAnn = {
-                id: Date.now(),
-                title: title,
-                desc: desc,
-                tag: tag,
-                date: dateStr
-            };
-
-            state.announcements.unshift(newAnn);
-            saveState();
-            renderAnnouncements();
-
-            document.getElementById('new-ann-title').value = '';
-            document.getElementById('new-ann-desc').value = '';
-            showToast("Pengumuman baru berjaya diterbitkan!", "success");
+            container.innerHTML = appState.announcements.map(item => `
+                <div class="announcement-box">
+                    <span class="announcement-badge"><i class="fa-regular fa-calendar me-1"></i>${item.date || 'Terkini'}</span>
+                    <h5 class="fw-bold mb-1" style="font-family: var(--font-serif-heading); color: var(--pisp-text-headline);">${escapeHtml(item.title)}</h5>
+                    <p class="text-muted small mb-3">${escapeHtml(item.description)}</p>
+                    ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn btn-pisp-outline btn-sm">Buka Pautan</a>` : ''}
+                </div>
+            `).join('');
         }
 
-        function confirmDeleteAnnouncement(id) {
-            const item = state.announcements.find(a => a.id === id);
-            openConfirmModal(
-                "Padam Pengumuman?",
-                `Adakah anda pasti mahu memadam "${item ? item.title : 'pengumuman ini'}"?`,
-                () => {
-                    state.announcements = state.announcements.filter(a => a.id !== id);
-                    saveState();
-                    renderAnnouncements();
-                    showToast("Pengumuman telah dipadam.", "info");
-                }
-            );
+        async function loadPortal() {
+            const container = document.getElementById('portal-container');
+            container.innerHTML = getSkeletonTiles();
+            const res = await apiCall('getData', 'portal');
+            if (res.success && res.data) {
+                appState.portal = res.data;
+                renderTilesGrid(container, appState.portal, 'Buka Portal');
+            } else {
+                showTileError(container, loadPortal);
+            }
         }
 
-        function renderAITools() {
-            const grid = document.getElementById('ai-tools-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
+        async function loadStudentResources() {
+            const container = document.getElementById('student-resources-container');
+            container.innerHTML = getSkeletonTiles();
+            const res = await apiCall('getData', 'studentResources');
+            if (res.success && res.data) {
+                appState.studentResources = res.data;
+                renderTilesGrid(container, appState.studentResources, 'Akses');
+            } else {
+                showTileError(container, loadStudentResources);
+            }
+        }
 
-            const list = state.aiTools || defaultAiToolsData;
+        async function loadLibraries() {
+            const container = document.getElementById('libraries-container');
+            container.innerHTML = getSkeletonTiles();
+            const res = await apiCall('getData', 'libraries');
+            if (res.success && res.data) {
+                appState.libraries = res.data;
+                renderLibraries(appState.libraries);
+            } else {
+                showTileError(container, loadLibraries);
+            }
+        }
 
-            list.forEach(tool => {
-                const card = document.createElement('a');
-                card.href = tool.url || '#';
-                card.target = "_blank";
-                card.rel = "noopener noreferrer";
-                card.className = "bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 flex flex-col justify-between group";
+        function renderLibraries(list) {
+            const container = document.getElementById('libraries-container');
+            if (!list || list.length === 0) {
+                container.innerHTML = `<div class="col-12 text-center text-muted py-4">Tiada perpustakaan yang sepadan dengan carian anda.</div>`;
+                return;
+            }
 
-                card.innerHTML = `
+            container.innerHTML = list.map(item => `
+                <div class="tile-item">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-2xl ${tool.color || 'text-emerald-500'} group-hover:scale-110 transition-transform">
-                                <i class="fa-solid ${tool.icon || 'fa-robot'}"></i>
+                        <div class="tile-header">
+                            <div class="tile-icon-box">
+                                <i class="fa-solid fa-university"></i>
                             </div>
-                            <span class="text-[10px] font-bold px-2 py-1 bg-slate-100 text-slate-600 rounded-full uppercase tracking-wider">${escapeHtml(tool.category || 'Pendidikan')}</span>
-                        </div>
-                        <h3 class="font-bold text-slate-900 text-base group-hover:text-emerald-600 transition-colors flex items-center space-x-1">
-                            <span>${escapeHtml(tool.name)}</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40"></i>
-                        </h3>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">${escapeHtml(tool.desc || '')}</p>
-                    </div>
-                    <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-emerald-600">
-                        <span>Gunakan AI</span>
-                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-
-            renderAdminAiList();
-        }
-
-        function renderAdminAiList() {
-            const adminList = document.getElementById('admin-ai-list');
-            if (!adminList) return;
-
-            adminList.innerHTML = '';
-            const list = state.aiTools || [];
-
-            list.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "p-3 bg-white rounded-xl border border-slate-200 text-xs space-y-2";
-                card.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <span class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-                            <i class="fa-solid ${item.icon || 'fa-robot'} ${item.color || 'text-emerald-500'}"></i>
-                            ${escapeHtml(item.name)}
-                            <span class="text-[10px] font-normal text-slate-400">(${escapeHtml(item.category || '')})</span>
-                        </span>
-                        <button onclick="confirmDeleteAi(${item.id})" class="text-rose-600 hover:text-rose-800 text-xs font-bold px-2 py-0.5 rounded hover:bg-rose-50 transition-colors">
-                            <i class="fa-solid fa-trash mr-1"></i>Padam
-                        </button>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">URL Pautan AI</label>
-                        <div class="flex gap-2">
-                            <input type="url" id="ai-url-${item.id}" value="${escapeHtml(item.url || '')}" placeholder="https://..." class="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300 bg-slate-50 focus:bg-white">
-                            <button onclick="saveAiUrl(${item.id})" class="px-3 py-1 bg-ipgNavy hover:bg-ipgBlue text-white font-bold text-xs rounded-lg transition-colors shrink-0">
-                                Simpan
-                            </button>
+                            <div>
+                                <h3 class="tile-title">${escapeHtml(item.university)}</h3>
+                                <div class="tile-subtitle">${escapeHtml(item.library)}</div>
+                            </div>
                         </div>
                     </div>
-                `;
-                adminList.appendChild(card);
-            });
-        }
-
-        function addNewAITool() {
-            const name = document.getElementById('new-ai-name').value.trim();
-            const cat = document.getElementById('new-ai-cat').value.trim();
-            const url = document.getElementById('new-ai-url').value.trim();
-            const desc = document.getElementById('new-ai-desc').value.trim();
-            const icon = document.getElementById('new-ai-icon').value;
-
-            if (!name || !url) {
-                showToast("Sila masukkan sekurang-kurangnya Nama AI dan URL Pautan.", "error");
-                return;
-            }
-
-            const newAi = {
-                id: Date.now(),
-                name: name,
-                category: cat || "Pendidikan",
-                url: url,
-                desc: desc || "Alat AI untuk sokongan pengajaran.",
-                icon: icon || "fa-robot",
-                color: "text-emerald-600"
-            };
-
-            if (!state.aiTools) state.aiTools = [];
-            state.aiTools.push(newAi);
-            saveState();
-            renderAITools();
-
-            document.getElementById('new-ai-name').value = '';
-            document.getElementById('new-ai-cat').value = '';
-            document.getElementById('new-ai-url').value = '';
-            document.getElementById('new-ai-desc').value = '';
-            showToast("Alat AI Pendidikan baru berjaya ditambah!", "success");
-        }
-
-        function saveAiUrl(id) {
-            const input = document.getElementById(`ai-url-${id}`);
-            if (!input) return;
-
-            const newUrl = input.value.trim();
-            if (!newUrl) {
-                showToast("URL Pautan tidak boleh dibiarkan kosong.", "error");
-                return;
-            }
-
-            const item = state.aiTools.find(a => a.id === id);
-            if (item) {
-                item.url = newUrl;
-                saveState();
-                renderAITools();
-                showToast(`Pautan AI ${item.name} berjaya dikemaskini!`, "success");
-            }
-        }
-
-        function confirmDeleteAi(id) {
-            const item = state.aiTools.find(a => a.id === id);
-            openConfirmModal(
-                "Padam AI Pendidikan?",
-                `Adakah anda pasti mahu memadam "${item ? item.name : 'alat AI ini'}" daripada pangkalan data?`,
-                () => {
-                    state.aiTools = state.aiTools.filter(a => a.id !== id);
-                    saveState();
-                    renderAITools();
-                    showToast("Alat AI Pendidikan telah dipadam.", "info");
-                }
-            );
-        }
-
-        function renderSumberPelajar() {
-            const sLinks = state.sumberLinks || {};
-            const classroomBtn = document.getElementById('sumber-classroom-btn');
-            const itemsBtn = document.getElementById('sumber-items-btn');
-            const psagBtn = document.getElementById('sumber-psag-btn');
-            const delimaBtn = document.getElementById('sumber-delima-btn');
-
-            if (classroomBtn) classroomBtn.href = sLinks.classroomUrl || 'https://classroom.google.com';
-            if (itemsBtn) itemsBtn.href = sLinks.itemsUrl || 'https://items.moe.gov.my/umum/';
-            if (psagBtn) psagBtn.href = sLinks.psagUrl || 'http://psagipgkpi.blogspot.com/';
-            if (delimaBtn) delimaBtn.href = sLinks.delimaUrl || 'https://delima.moe-dl.edu.my';
-
-            const list = document.getElementById('sumber-list');
-            const badge = document.getElementById('sumber-count-badge');
-            if (!list) return;
-
-            list.innerHTML = '';
-            const resources = state.sumberPelajar || defaultUaLibraries;
-
-            if (badge) badge.textContent = `${resources.length} Perpustakaan`;
-
-            resources.forEach((item, index) => {
-                const row = document.createElement('div');
-                row.className = "py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-50 px-3 rounded-xl transition-colors";
-                row.innerHTML = `
-                    <div class="flex items-center space-x-3">
-                        <span class="w-8 h-8 rounded-lg bg-ipgNavy/10 text-ipgNavy flex items-center justify-center text-xs font-bold shrink-0">${index + 1}</span>
-                        <div>
-                            <h4 class="text-xs sm:text-sm font-bold text-slate-800">${escapeHtml(item.title)}</h4>
-                            <span class="text-[10px] text-slate-400 font-medium">${escapeHtml(item.category || 'Universiti Awam')}</span>
-                        </div>
-                    </div>
-                    <a href="${escapeHtml(item.link || '#')}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-slate-100 hover:bg-ipgNavy hover:text-white text-slate-700 text-xs font-semibold rounded-lg transition-colors flex items-center justify-center space-x-1 self-start sm:self-auto">
-                        <span>Akses Portal / OPAC</span> <i class="fa-solid fa-external-link text-[10px]"></i>
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn btn-pisp-primary w-100 mt-2">
+                        Lawati Portal <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
                     </a>
-                `;
-                list.appendChild(row);
-            });
-
-            renderAdminSumberList();
+                </div>
+            `).join('');
         }
 
-        function renderAdminSumberList() {
-            const adminList = document.getElementById('admin-sumber-list');
-            if (!adminList) return;
-
-            adminList.innerHTML = '';
-            const list = state.sumberPelajar || [];
-
-            list.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "p-3.5 bg-white rounded-xl border border-slate-200 text-xs space-y-2.5 shadow-sm";
-                card.innerHTML = `
-                    <div class="flex justify-between items-center border-b border-slate-100 pb-2">
-                        <span class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-                            <i class="fa-solid fa-building-columns text-ipgBlue"></i>
-                            ${escapeHtml(item.title)}
-                        </span>
-                        <button onclick="confirmDeleteUaLibrary(${item.id})" class="text-rose-600 hover:text-rose-800 text-xs font-bold px-2 py-0.5 rounded hover:bg-rose-50 transition-colors shrink-0">
-                            <i class="fa-solid fa-trash mr-1"></i>Padam
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">Nama Perpustakaan</label>
-                            <input type="text" id="ua-title-${item.id}" value="${escapeHtml(item.title || '')}" class="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-ipgNavy">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">Kategori / Kod UA</label>
-                            <input type="text" id="ua-cat-${item.id}" value="${escapeHtml(item.category || '')}" class="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-ipgNavy">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">URL Pautan Portal / OPAC</label>
-                        <div class="flex gap-2">
-                            <input type="url" id="ua-url-${item.id}" value="${escapeHtml(item.link || '')}" placeholder="https://..." class="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:ring-1 focus:ring-ipgNavy">
-                            <button onclick="saveUaLibraryDetails(${item.id})" class="px-3.5 py-1 bg-ipgNavy hover:bg-ipgBlue text-white font-bold text-xs rounded-lg transition-colors shrink-0 flex items-center space-x-1 shadow-sm">
-                                <i class="fa-solid fa-floppy-disk"></i>
-                                <span>Simpan</span>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                adminList.appendChild(card);
-            });
-        }
-
-        function addNewUaLibrary() {
-            const title = document.getElementById('new-ua-title').value.trim();
-            const cat = document.getElementById('new-ua-cat').value.trim();
-            const link = document.getElementById('new-ua-link').value.trim();
-
-            if (!title || !link) {
-                showToast("Sila masukkan sekurang-kurangnya Nama Perpustakaan dan URL Pautan.", "error");
-                return;
-            }
-
-            const newLib = {
-                id: Date.now(),
-                title: title,
-                category: cat || "Universiti Awam",
-                link: link
-            };
-
-            if (!state.sumberPelajar) state.sumberPelajar = [];
-            state.sumberPelajar.push(newLib);
-            saveState();
-            renderSumberPelajar();
-
-            document.getElementById('new-ua-title').value = '';
-            document.getElementById('new-ua-cat').value = '';
-            document.getElementById('new-ua-link').value = '';
-            showToast("Perpustakaan Universiti Awam baru berjaya ditambah!", "success");
-        }
-
-        function saveUaLibraryDetails(id) {
-            const titleInput = document.getElementById(`ua-title-${id}`);
-            const catInput = document.getElementById(`ua-cat-${id}`);
-            const urlInput = document.getElementById(`ua-url-${id}`);
-
-            if (!urlInput) return;
-
-            const newTitle = titleInput ? titleInput.value.trim() : '';
-            const newCat = catInput ? catInput.value.trim() : '';
-            const newLink = urlInput.value.trim();
-
-            if (!newLink) {
-                showToast("URL Pautan tidak boleh dibiarkan kosong.", "error");
-                return;
-            }
-
-            const item = state.sumberPelajar.find(s => s.id === id);
-            if (item) {
-                if (newTitle) item.title = newTitle;
-                if (newCat) item.category = newCat;
-                item.link = newLink;
-                saveState();
-                renderSumberPelajar();
-                showToast(`Pautan Perpustakaan ${item.category || ''} berjaya dikemaskini!`, "success");
-            }
-        }
-
-        function confirmDeleteUaLibrary(id) {
-            const item = state.sumberPelajar.find(s => s.id === id);
-            openConfirmModal(
-                "Padam Perpustakaan UA?",
-                `Adakah anda pasti mahu memadam "${item ? item.title : 'perpustakaan ini'}" daripada senarai?`,
-                () => {
-                    state.sumberPelajar = state.sumberPelajar.filter(s => s.id !== id);
-                    saveState();
-                    renderSumberPelajar();
-                    showToast("Perpustakaan Universiti Awam telah dipadam.", "info");
-                }
-            );
-        }
-
-        function renderRujukan() {
-            const grid = document.getElementById('rujukan-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-
-            const list = state.rujukan || defaultRujukanData;
-
-            list.forEach(item => {
-                const card = document.createElement('a');
-                card.href = item.url || '#';
-                card.target = "_blank";
-                card.rel = "noopener noreferrer";
-                card.className = "bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 flex flex-col justify-between group";
-
-                card.innerHTML = `
-                    <div>
-                        <div class="w-10 h-10 ${item.color || 'bg-blue-600'} text-white rounded-xl flex items-center justify-center text-lg mb-4 shadow-md group-hover:scale-110 transition-transform">
-                            <i class="fa-solid ${item.icon || 'fa-book-open'}"></i>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-wider font-extrabold text-slate-400 block">${escapeHtml(item.type || 'Rujukan Akademik')}</span>
-                        <h3 class="font-bold text-slate-900 text-base mt-0.5 group-hover:text-ipgBlue transition-colors flex items-center space-x-1">
-                            <span>${escapeHtml(item.name)}</span>
-                            <i class="fa-solid fa-external-link text-[10px] opacity-40"></i>
-                        </h3>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">${escapeHtml(item.desc || '')}</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-ipgBlue">
-                        <span>Akses Pangkalan Data</span>
-                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-
-            renderAdminRujukanList();
-        }
-
-        function renderAdminRujukanList() {
-            const adminList = document.getElementById('admin-rujukan-list');
-            if (!adminList) return;
-
-            adminList.innerHTML = '';
-            const list = state.rujukan || [];
-
-            list.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = "p-3 bg-white rounded-xl border border-slate-200 text-xs space-y-2";
-                card.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <span class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-                            <span class="w-2.5 h-2.5 rounded-full ${item.color || 'bg-blue-600'}"></span>
-                            ${escapeHtml(item.name)}
-                        </span>
-                        <button onclick="confirmDeleteRujukan(${item.id})" class="text-rose-600 hover:text-rose-800 text-xs font-bold px-2 py-0.5 rounded hover:bg-rose-50 transition-colors">
-                            <i class="fa-solid fa-trash mr-1"></i>Padam
-                        </button>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">URL Pautan Link</label>
-                        <div class="flex gap-2">
-                            <input type="url" id="ref-url-${item.id}" value="${escapeHtml(item.url || '')}" placeholder="https://..." class="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300 bg-slate-50 focus:bg-white">
-                            <button onclick="saveRujukanUrl(${item.id})" class="px-3 py-1 bg-ipgNavy hover:bg-ipgBlue text-white font-bold text-xs rounded-lg transition-colors shrink-0">
-                                Simpan
-                            </button>
-                        </div>
-                    </div>
-                `;
-                adminList.appendChild(card);
-            });
-        }
-
-        function addNewRujukan() {
-            const name = document.getElementById('new-ref-name').value.trim();
-            const type = document.getElementById('new-ref-type').value.trim();
-            const url = document.getElementById('new-ref-url').value.trim();
-            const desc = document.getElementById('new-ref-desc').value.trim();
-            const color = document.getElementById('new-ref-color').value;
-
-            if (!name || !url) {
-                showToast("Sila isi sekurang-kurangnya Nama dan URL Pautan.", "error");
-                return;
-            }
-
-            const newRef = {
-                id: Date.now(),
-                name: name,
-                type: type || "Pangkalan Data",
-                url: url,
-                desc: desc || "Portal rujukan akademik tambahan.",
-                icon: "fa-book-bookmark",
-                color: color || "bg-blue-600"
-            };
-
-            if (!state.rujukan) state.rujukan = [];
-            state.rujukan.push(newRef);
-            saveState();
-            renderRujukan();
-
-            document.getElementById('new-ref-name').value = '';
-            document.getElementById('new-ref-type').value = '';
-            document.getElementById('new-ref-url').value = '';
-            document.getElementById('new-ref-desc').value = '';
-            showToast("Rujukan akademik baru berjaya ditambah!", "success");
-        }
-
-        function saveRujukanUrl(id) {
-            const input = document.getElementById(`ref-url-${id}`);
-            if (!input) return;
-
-            const newUrl = input.value.trim();
-            if (!newUrl) {
-                showToast("URL Pautan tidak boleh dibiarkan kosong.", "error");
-                return;
-            }
-
-            const item = state.rujukan.find(r => r.id === id);
-            if (item) {
-                item.url = newUrl;
-                saveState();
-                renderRujukan();
-                showToast(`Pautan untuk ${item.name} berjaya dikemaskini!`, "success");
-            }
-        }
-
-        function confirmDeleteRujukan(id) {
-            const item = state.rujukan.find(r => r.id === id);
-            openConfirmModal(
-                "Padam Rujukan Akademik?",
-                `Adakah anda pasti mahu memadam "${item ? item.name : 'item ini'}" daripada pangkalan rujukan?`,
-                () => {
-                    state.rujukan = state.rujukan.filter(r => r.id !== id);
-                    saveState();
-                    renderRujukan();
-                    showToast("Rujukan akademik telah dipadam.", "info");
-                }
-            );
-        }
-
-        function handleGoogleSearch(event) {
-            if (event) event.preventDefault();
-            const query = document.getElementById('resource-search-input').value.trim();
-            if (!query) {
-                showToast("Sila masukkan kata kunci carian.", "error");
-                return;
-            }
-            window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
-        }
-
-        function handleScholarSearch() {
-            const query = document.getElementById('resource-search-input').value.trim();
-            if (!query) {
-                showToast("Sila masukkan kata kunci carian akademik.", "error");
-                return;
-            }
-            window.open(`https://scholar.google.com/scholar?q=${encodeURIComponent(query)}`, '_blank');
-        }
-
-        function switchAdminTab(tabName) {
-            ['announcements', 'sumber', 'rujukan', 'ai', 'banner', 'credentials', 'backend'].forEach(t => {
-                const panel = document.getElementById(`admin-panel-${t}`);
-                if (panel) panel.classList.add('hidden');
-                const tabBtn = document.getElementById(`admin-tab-${t}`);
-                if (tabBtn) {
-                    tabBtn.classList.remove('text-ipgNavy', 'border-b-2', 'border-ipgNavy');
-                    tabBtn.classList.add('text-slate-400');
-                }
-            });
-
-            const activePanel = document.getElementById(`admin-panel-${tabName}`);
-            if (activePanel) activePanel.classList.remove('hidden');
-            const activeTabBtn = document.getElementById(`admin-tab-${tabName}`);
-            if (activeTabBtn) {
-                activeTabBtn.classList.add('text-ipgNavy', 'border-b-2', 'border-ipgNavy');
-                activeTabBtn.classList.remove('text-slate-400');
-            }
-        }
-
-        function openAdminModal() {
-            const modal = document.getElementById('admin-modal');
-            if (!modal) return;
-            modal.classList.remove('hidden');
-
-            const loginView = document.getElementById('admin-login-view');
-            const dashboardView = document.getElementById('admin-dashboard-view');
-            const titleEl = document.getElementById('admin-modal-title');
-
-            if (state.isLoggedIn) {
-                if (loginView) loginView.classList.add('hidden');
-                if (dashboardView) dashboardView.classList.remove('hidden');
-                if (titleEl) titleEl.textContent = "Portal Pentadbir (Admin)";
-                switchAdminTab('announcements');
+        async function loadAcademicReferences() {
+            const container = document.getElementById('references-container');
+            container.innerHTML = getSkeletonTiles();
+            const res = await apiCall('getData', 'academicReferences');
+            if (res.success && res.data) {
+                appState.academicReferences = res.data;
+                renderTilesGrid(container, appState.academicReferences, 'Akses');
             } else {
-                if (loginView) loginView.classList.remove('hidden');
-                if (dashboardView) dashboardView.classList.add('hidden');
-                if (titleEl) titleEl.textContent = "Log Masuk Pentadbir (Admin)";
+                showTileError(container, loadAcademicReferences);
             }
         }
 
-        function closeAdminModal() {
-            const modal = document.getElementById('admin-modal');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function handleAdminLogin() {
-            const idInput = document.getElementById('admin-id-input').value.trim();
-            const passInput = document.getElementById('admin-pass-input').value.trim();
-
-            if (idInput === state.adminId && passInput === state.adminPass) {
-                state.isLoggedIn = true;
-                showToast("Log masuk berjaya! Selamat datang Admin.", "success");
-                openAdminModal();
+        async function loadAI() {
+            const container = document.getElementById('ai-container');
+            container.innerHTML = getSkeletonTiles();
+            const res = await apiCall('getData', 'ai');
+            if (res.success && res.data) {
+                appState.ai = res.data;
+                renderTilesGrid(container, appState.ai, 'Buka AI');
             } else {
-                showToast("ID Admin atau Kata Laluan tidak sah.", "error");
+                showTileError(container, loadAI);
             }
+        }
+
+        function renderTilesGrid(container, list, btnText) {
+            if (!list || list.length === 0) {
+                container.innerHTML = `<div class="col-12 text-center text-muted py-4">Tiada data ditemui.</div>`;
+                return;
+            }
+
+            container.innerHTML = list.map(item => `
+                <div class="tile-item">
+                    <div>
+                        <div class="tile-header">
+                            <div class="tile-icon-box">
+                                <i class="${item.icon || 'fa-solid fa-link'}"></i>
+                            </div>
+                            <div>
+                                <h3 class="tile-title">${escapeHtml(item.name)}</h3>
+                            </div>
+                        </div>
+                        <div class="tile-desc">${escapeHtml(item.description)}</div>
+                    </div>
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn btn-pisp-primary w-100">
+                        ${btnText} <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        function getSkeletonTiles() {
+            return Array(4).fill(0).map(() => `
+                <div class="tile-item">
+                    <div class="d-flex gap-3 align-items-center mb-3">
+                        <div class="bg-secondary-subtle rounded" style="height: 48px; width: 48px;"></div>
+                        <div class="bg-secondary-subtle rounded" style="height: 20px; width: 60%;"></div>
+                    </div>
+                    <div class="bg-secondary-subtle rounded mb-3" style="height: 40px; width: 100%;"></div>
+                    <div class="bg-secondary-subtle rounded" style="height: 38px; width: 100%;"></div>
+                </div>
+            `).join('');
+        }
+
+        function showTileError(container, retryFn) {
+            container.innerHTML = `
+                <div class="col-12 text-center py-4">
+                    <p class="text-danger small mb-2"><i class="fa-solid fa-circle-exclamation me-1"></i> Maaf, data tidak dapat dimuatkan.</p>
+                    <button class="btn btn-sm btn-pisp-outline" onclick="${retryFn.name}()">Cuba Lagi</button>
+                </div>`;
+        }
+
+        function executeAcademicSearch(e) {
+            e.preventDefault();
+            const query = document.getElementById('academicSearchQuery').value.trim();
+            if (!query) return;
+
+            const engine = document.querySelector('input[name="searchEngine"]:checked').value;
+            let targetUrl = '';
+
+            const encoded = encodeURIComponent(query);
+            if (engine === 'scholar') {
+                targetUrl = `https://scholar.google.com/scholar?q=${encoded}`;
+            } else if (engine === 'books') {
+                targetUrl = `https://www.google.com/search?tbm=bks&q=${encoded}`;
+            } else {
+                targetUrl = `https://www.google.com/search?q=${encoded}`;
+            }
+
+            window.open(targetUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        function filterLibraries() {
+            const q = document.getElementById('libSearchInput').value.toLowerCase();
+            const filtered = appState.libraries.filter(item => 
+                (item.university && item.university.toLowerCase().includes(q)) ||
+                (item.library && item.library.toLowerCase().includes(q))
+            );
+            renderLibraries(filtered);
+        }
+
+        function sortLibraries(direction) {
+            appState.libraries.sort((a, b) => {
+                const nameA = (a.university || '').toLowerCase();
+                const nameB = (b.university || '').toLowerCase();
+                return direction === 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+            });
+            filterLibraries();
+        }
+
+        function filterReferences() {
+            const q = document.getElementById('refSearchInput').value.toLowerCase();
+            const filtered = appState.academicReferences.filter(item => 
+                (item.name && item.name.toLowerCase().includes(q)) ||
+                (item.description && item.description.toLowerCase().includes(q))
+            );
+            renderTilesGrid(document.getElementById('references-container'), filtered, 'Akses');
+        }
+
+        function sortReferences(direction) {
+            appState.academicReferences.sort((a, b) => {
+                const nameA = (a.name || '').toLowerCase();
+                const nameB = (b.name || '').toLowerCase();
+                return direction === 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+            });
+            filterReferences();
+        }
+
+        function filterAI() {
+            const q = document.getElementById('aiSearchInput').value.toLowerCase();
+            const filtered = appState.ai.filter(item => 
+                (item.name && item.name.toLowerCase().includes(q)) ||
+                (item.description && item.description.toLowerCase().includes(q))
+            );
+            renderTilesGrid(document.getElementById('ai-container'), filtered, 'Buka AI');
+        }
+
+        function sortAI(direction) {
+            appState.ai.sort((a, b) => {
+                const nameA = (a.name || '').toLowerCase();
+                const nameB = (b.name || '').toLowerCase();
+                return direction === 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+            });
+            filterAI();
+        }
+
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('adminUsername').value.trim();
+            const pass = document.getElementById('adminPassword').value.trim();
+            const alertBox = document.getElementById('loginAlert');
+            const btn = document.getElementById('btnLoginSubmit');
+
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> Mengesahkan...`;
+            alertBox.innerHTML = '';
+
+            const res = await apiCall('login', 'admin', 'POST', { username: user, password: pass });
+
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> Log Masuk Portal Admin`;
+
+            if (res.success) {
+                appState.adminSession = {
+                    token: res.token,
+                    user: user,
+                    expiry: Date.now() + (CONFIG.SESSION_TIMEOUT_MINS * 60 * 1000)
+                };
+                showToast("Log masuk admin berjaya.");
+                showAdminDashboard();
+            } else {
+                alertBox.innerHTML = `<div class="alert alert-danger small py-2 bg-white border-danger text-danger">${res.message || "ID Admin atau kata laluan tidak sah."}</div>`;
+            }
+        }
+
+        function showAdminDashboard() {
+            document.getElementById('admin-login-card').classList.add('d-none');
+            document.getElementById('admin-dashboard-layout').classList.remove('d-none');
+            renderAdminCrudTable();
+            checkBackendHealth();
         }
 
         function handleAdminLogout() {
-            state.isLoggedIn = false;
-            showToast("Anda telah log keluar daripada akaun admin.", "info");
-            openAdminModal();
+            appState.adminSession = null;
+            document.getElementById('adminLoginForm').reset();
+            document.getElementById('admin-dashboard-layout').classList.add('d-none');
+            document.getElementById('admin-login-card').classList.remove('d-none');
+            showToast("Anda telah log keluar.");
         }
 
-        function saveAdminCredentials() {
-            const newId = document.getElementById('update-admin-id').value.trim();
-            const newPass = document.getElementById('update-admin-pass').value.trim();
+        function validateSession() {
+            if (!appState.adminSession || Date.now() > appState.adminSession.expiry) {
+                handleAdminLogout();
+                showToast("Sesi anda telah tamat. Sila log masuk semula.");
+                return false;
+            }
+            appState.adminSession.expiry = Date.now() + (CONFIG.SESSION_TIMEOUT_MINS * 60 * 1000);
+            return true;
+        }
 
-            if (!newId || !newPass) {
-                showToast("ID dan Kata Laluan baru tidak boleh kosong.", "error");
+        async function checkBackendHealth() {
+            const badge = document.getElementById('backendStatusBadge');
+            if (!CONFIG.API_URL || !CONFIG.API_URL.startsWith('http')) {
+                badge.className = "status-badge error";
+                badge.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Backend Unconfigured (Local Fallback)`;
                 return;
             }
 
-            state.adminId = newId;
-            state.adminPass = newPass;
-            saveState();
-            showToast("Kredensial Admin berjaya dikemaskini!", "success");
-            document.getElementById('update-admin-id').value = '';
-            document.getElementById('update-admin-pass').value = '';
-        }
-
-        function saveAppsScriptUrl() {
-            const url = document.getElementById('apps-script-url-input').value.trim();
-            state.appsScriptUrl = url;
-            saveState();
-            showToast("URL Google Apps Script berjaya disimpan!", "success");
-        }
-
-        function showToast(message, type = "info") {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-
-            const toast = document.createElement('div');
-            toast.className = "pointer-events-auto px-4 py-3 rounded-xl shadow-lg text-white text-xs font-semibold flex items-center space-x-2 transition-all transform translate-y-2 opacity-0";
-
-            if (type === "success") toast.classList.add("bg-emerald-600");
-            else if (type === "error") toast.classList.add("bg-rose-600");
-            else toast.classList.add("bg-ipgNavy");
-
-            let icon = "fa-circle-info";
-            if (type === "success") icon = "fa-circle-check";
-            if (type === "error") icon = "fa-triangle-exclamation";
-
-            toast.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${escapeHtml(message)}</span>`;
-            container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.remove("translate-y-2", "opacity-0");
-            }, 50);
-
-            setTimeout(() => {
-                toast.classList.add("opacity-0", "translate-y-2");
-                setTimeout(() => toast.remove(), 300);
-            }, 3500);
-        }
-
-        function openConfirmModal(title, message, onConfirm) {
-            const modal = document.getElementById('confirm-modal');
-            const titleEl = document.getElementById('confirm-title');
-            const msgEl = document.getElementById('confirm-message');
-            const okBtn = document.getElementById('confirm-ok-btn');
-            const cancelBtn = document.getElementById('confirm-cancel-btn');
-
-            if (!modal) return;
-
-            if (titleEl) titleEl.textContent = title;
-            if (msgEl) msgEl.textContent = message;
-
-            modal.classList.remove('hidden');
-
-            const handleCancel = () => {
-                modal.classList.add('hidden');
-                cancelBtn.removeEventListener('click', handleCancel);
-            };
-
-            const handleOk = () => {
-                modal.classList.add('hidden');
-                if (typeof onConfirm === 'function') onConfirm();
-                okBtn.removeEventListener('click', handleOk);
-            };
-
-            cancelBtn.onclick = handleCancel;
-            okBtn.onclick = handleOk;
-        }
-
-        function saveState() {
-            localStorage.setItem('pisp_hub_state', JSON.stringify({
-                adminId: state.adminId,
-                adminPass: state.adminPass,
-                announcements: state.announcements,
-                appsScriptUrl: state.appsScriptUrl,
-                banner: state.banner,
-                sumberLinks: state.sumberLinks,
-                sumberPelajar: state.sumberPelajar,
-                rujukan: state.rujukan,
-                aiTools: state.aiTools
-            }));
-        }
-
-        function loadStoredState() {
             try {
-                const saved = localStorage.getItem('pisp_hub_state');
-                if (saved) {
-                    const parsed = JSON.parse(saved);
-                    if (parsed.adminId) state.adminId = parsed.adminId;
-                    if (parsed.adminPass) state.adminPass = parsed.adminPass;
-                    if (parsed.announcements) state.announcements = parsed.announcements;
-                    if (parsed.appsScriptUrl) state.appsScriptUrl = parsed.appsScriptUrl;
-                    if (parsed.banner) state.banner = parsed.banner;
-                    if (parsed.sumberLinks) state.sumberLinks = parsed.sumberLinks;
-                    if (parsed.sumberPelajar) state.sumberPelajar = parsed.sumberPelajar;
-                    if (parsed.rujukan) state.rujukan = parsed.rujukan;
-                    if (parsed.aiTools) state.aiTools = parsed.aiTools;
+                const res = await apiCall('getData', 'announcements');
+                if (res.success) {
+                    badge.className = "status-badge connected";
+                    badge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Backend Connected`;
+                } else {
+                    throw new Error();
                 }
-            } catch (e) {
-                console.warn("State initialization fallback used", e);
+            } catch (err) {
+                badge.className = "status-badge error";
+                badge.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Connection Error`;
             }
         }
 
+        function switchAdminTab(type, el) {
+            document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+            appState.activeAdminType = type;
+
+            const titles = {
+                announcements: "Pengurusan Pengumuman",
+                portal: "Pengurusan Portal Utama",
+                studentResources: "Pengurusan Sumber Pelajar",
+                libraries: "Pengurusan Perpustakaan Awam",
+                academicReferences: "Pengurusan Rujukan Akademik",
+                ai: "Pengurusan AI Pendidikan",
+                config: "Konfigurasi Backend API"
+            };
+            document.getElementById('adminTabTitle').innerText = titles[type];
+
+            if (type === 'config') {
+                renderAdminConfigPanel();
+            } else {
+                document.getElementById('adminCrudContent').classList.remove('d-none');
+                document.getElementById('adminConfigContent').classList.add('d-none');
+                document.getElementById('btnAdminAdd').classList.remove('d-none');
+                renderAdminCrudTable();
+            }
+        }
+
+        function renderAdminConfigPanel() {
+            document.getElementById('adminCrudContent').classList.add('d-none');
+            document.getElementById('adminConfigContent').classList.remove('d-none');
+            document.getElementById('btnAdminAdd').classList.add('d-none');
+            
+            const currentUrl = CONFIG.API_URL || "PASTE_APPS_SCRIPT_URL";
+            document.getElementById('inputApiUrl').value = CONFIG.API_URL && CONFIG.API_URL.startsWith('http') ? CONFIG.API_URL : '';
+            document.getElementById('displayApiUrl').innerText = currentUrl;
+        }
+
+        function saveApiUrlConfig() {
+            const val = document.getElementById('inputApiUrl').value.trim();
+            if (val && !val.startsWith('http')) {
+                alert("Sila masukkan URL Google Apps Script yang sah (bermula dengan http:// atau https://).");
+                return;
+            }
+            localStorage.setItem('PISP_API_URL', val);
+            CONFIG.API_URL = val;
+            document.getElementById('displayApiUrl').innerText = val || "PASTE_APPS_SCRIPT_URL";
+            showToast("Konfigurasi API URL berjaya disimpan.");
+            checkBackendHealth();
+            loadAllPublicData();
+        }
+
+        function renderAdminCrudTable() {
+            if (!validateSession()) return;
+            const type = appState.activeAdminType;
+            const list = appState[type] || [];
+            const headerRow = document.getElementById('adminTableHeader');
+            const tbody = document.getElementById('adminTableBody');
+
+            if (type === 'libraries') {
+                headerRow.innerHTML = `<th>Universiti</th><th>Perpustakaan</th><th>URL</th><th>Aksi</th>`;
+                tbody.innerHTML = list.map(item => `
+                    <tr>
+                        <td class="fw-semibold" style="color: var(--pisp-text-headline);">${escapeHtml(item.university)}</td>
+                        <td>${escapeHtml(item.library)}</td>
+                        <td><a href="${item.url}" target="_blank" class="text-truncate d-inline-block" style="max-width: 150px; color: var(--pisp-btn-primary);">${escapeHtml(item.url)}</a></td>
+                        <td>
+                            <button class="btn btn-sm btn-pisp-outline me-1" onclick="openCrudModal('edit', '${item.id}')"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="promptDelete('${item.id}')"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            } else if (type === 'announcements') {
+                headerRow.innerHTML = `<th>Tajuk</th><th>Tarikh</th><th>Keterangan</th><th>Aksi</th>`;
+                tbody.innerHTML = list.map(item => `
+                    <tr>
+                        <td class="fw-semibold" style="color: var(--pisp-text-headline);">${escapeHtml(item.title)}</td>
+                        <td>${escapeHtml(item.date)}</td>
+                        <td><div class="text-truncate" style="max-width: 200px;">${escapeHtml(item.description)}</div></td>
+                        <td>
+                            <button class="btn btn-sm btn-pisp-outline me-1" onclick="openCrudModal('edit', '${item.id}')"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="promptDelete('${item.id}')"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            } else {
+                headerRow.innerHTML = `<th>Nama</th><th>Keterangan</th><th>Icon</th><th>URL</th><th>Aksi</th>`;
+                tbody.innerHTML = list.map(item => `
+                    <tr>
+                        <td class="fw-semibold" style="color: var(--pisp-text-headline);">${escapeHtml(item.name)}</td>
+                        <td><div class="text-truncate" style="max-width: 200px;">${escapeHtml(item.description)}</div></td>
+                        <td><i class="${item.icon}"></i></td>
+                        <td><a href="${item.url}" target="_blank" class="text-truncate d-inline-block" style="max-width: 150px; color: var(--pisp-btn-primary);">${escapeHtml(item.url)}</a></td>
+                        <td>
+                            <button class="btn btn-sm btn-pisp-outline me-1" onclick="openCrudModal('edit', '${item.id}')"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="promptDelete('${item.id}')"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-3">Tiada rekod ditemui.</td></tr>`;
+            }
+        }
+
+        function filterAdminTable() {
+            const q = document.getElementById('adminTableSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('#adminTableBody tr');
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(q) ? '' : 'none';
+            });
+        }
+
+        function openCrudModal(mode, id = null) {
+            if (!validateSession()) return;
+            const type = appState.activeAdminType;
+            const fieldsContainer = document.getElementById('crudFormFields');
+            document.getElementById('crudFormId').value = id || '';
+            document.getElementById('crudModalTitle').innerText = mode === 'add' ? 'Tambah Rekod Baharu' : 'Kemaskini Rekod';
+
+            let item = mode === 'edit' ? appState[type].find(i => i.id === id) : {};
+
+            if (type === 'libraries') {
+                fieldsContainer.innerHTML = `
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Universiti</label>
+                        <input type="text" class="form-control" id="field_university" value="${item.university || ''}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Nama Perpustakaan</label>
+                        <input type="text" class="form-control" id="field_library" value="${item.library || ''}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">URL Portal</label>
+                        <input type="url" class="form-control" id="field_url" value="${item.url || ''}" required>
+                    </div>
+                `;
+            } else if (type === 'announcements') {
+                fieldsContainer.innerHTML = `
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Tajuk Pengumuman</label>
+                        <input type="text" class="form-control" id="field_title" value="${item.title || ''}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Tarikh</label>
+                        <input type="date" class="form-control" id="field_date" value="${item.date || new Date().toISOString().split('T')[0]}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Keterangan</label>
+                        <textarea class="form-control" id="field_description" rows="3" required>${item.description || ''}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Pautan Tambahan (URL)</label>
+                        <input type="url" class="form-control" id="field_url" value="${item.url || ''}">
+                    </div>
+                `;
+            } else {
+                fieldsContainer.innerHTML = `
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Nama</label>
+                        <input type="text" class="form-control" id="field_name" value="${item.name || ''}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Keterangan</label>
+                        <textarea class="form-control" id="field_description" rows="3" required>${item.description || ''}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">Class Icon FontAwesome (cth: fa-solid fa-book)</label>
+                        <input type="text" class="form-control" id="field_icon" value="${item.icon || 'fa-solid fa-link'}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-muted">URL</label>
+                        <input type="url" class="form-control" id="field_url" value="${item.url || ''}" required>
+                    </div>
+                `;
+            }
+
+            const modal = new bootstrap.Modal(document.getElementById('crudModal'));
+            modal.show();
+        }
+
+        async function submitCrudForm() {
+            if (!validateSession()) return;
+            const type = appState.activeAdminType;
+            const id = document.getElementById('crudFormId').value;
+            const isEdit = !!id;
+
+            let payload = { id: id || undefined };
+
+            if (type === 'libraries') {
+                payload.university = document.getElementById('field_university').value.trim();
+                payload.library = document.getElementById('field_library').value.trim();
+                payload.url = document.getElementById('field_url').value.trim();
+            } else if (type === 'announcements') {
+                payload.title = document.getElementById('field_title').value.trim();
+                payload.date = document.getElementById('field_date').value;
+                payload.description = document.getElementById('field_description').value.trim();
+                payload.url = document.getElementById('field_url').value.trim();
+            } else {
+                payload.name = document.getElementById('field_name').value.trim();
+                payload.description = document.getElementById('field_description').value.trim();
+                payload.icon = document.getElementById('field_icon') ? document.getElementById('field_icon').value.trim() : 'fa-solid fa-link';
+                payload.url = document.getElementById('field_url').value.trim();
+            }
+
+            payload.status = 'Active';
+
+            const action = isEdit ? 'update' : 'add';
+            const method = isEdit ? 'PUT' : 'POST';
+
+            const modalEl = document.getElementById('crudModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalEl);
+
+            const res = await apiCall(action, type, method, payload);
+
+            if (res.success) {
+                modalInstance.hide();
+                showToast(isEdit ? "Data berjaya dikemaskini." : "Data berjaya ditambah.");
+                loadAllPublicData();
+                renderAdminCrudTable();
+            } else {
+                alert("Gagal menyimpan data: " + res.message);
+            }
+        }
+
+        function promptDelete(id) {
+            appState.itemToDeleteId = id;
+            const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            modal.show();
+        }
+
+        async function confirmDeleteExec() {
+            if (!validateSession() || !appState.itemToDeleteId) return;
+
+            const type = appState.activeAdminType;
+            const id = appState.itemToDeleteId;
+
+            const modalEl = document.getElementById('deleteConfirmModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalEl);
+
+            const res = await apiCall('delete', type, 'DELETE', { id: id });
+
+            modalInstance.hide();
+            appState.itemToDeleteId = null;
+
+            if (res.success) {
+                showToast("Data berjaya dipadam.");
+                loadAllPublicData();
+                renderAdminCrudTable();
+            } else {
+                alert("Gagal memadam data: " + res.message);
+            }
+        }
+
+        function showToast(msg) {
+            document.getElementById('toastMessage').innerText = msg;
+            const toastEl = document.getElementById('liveToast');
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
         function escapeHtml(str) {
+            if (!str) return '';
             return String(str)
                 .replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
